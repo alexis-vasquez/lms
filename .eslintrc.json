@@ -28,6 +28,7 @@
       "semi": "error",
       "react/jsx-filename-extension": ["error", { "extensions": [".tsx"]}],
       "import/no-default-export": "error",
-      "import/prefer-default-export": "off"
+      "import/prefer-default-export": "off",
+      "import/extensions": ["error", "ignorePackages", { "tsx": "never" }]
     }
 }
