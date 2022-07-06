@@ -15,13 +15,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "components/*": [
         "components/*"  
       ]
     }
   },
-  "include": ["./src", "./vite.config.ts"],
+  "include": ["./vite.config.ts", "./components"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
