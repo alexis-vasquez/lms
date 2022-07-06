@@ -27,7 +27,7 @@
       "spaced-comment": "error",
       "semi": "error",
       "react/jsx-filename-extension": ["error", { "extensions": [".tsx"]}],
-      "import/no-default-export": "error",
+      "import/no-default-export": "warn",
       "import/prefer-default-export": "off",
       "import/extensions": ["error", "ignorePackages", { "tsx": "never" }]
     }
