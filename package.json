@@ -2,9 +2,9 @@
   "name": "romalms",
   "private": true,
   "workspaces": [
-    "@romalms/api",
-    "@romalms/webapp",
-    "@romalms/design-system"
+    "api",
+    "webapp",
+    "design-system"
   ],
   "author": {
     "name": "Robert Martinez",
