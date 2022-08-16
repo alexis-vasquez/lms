@@ -11,9 +11,9 @@
     "email": "robert.g.martinez.a@gmail.com"
   },
   "scripts": {
-    "start:app": "yarn dev --workspace=webapp",
-    "storybook:app": "yarn storybook --workspace=webapp",
-    "storybook:design-system": "yarn storybook --workspace=design-system"
+    "start:app": "yarn workspace @romalms/webapp dev",
+    "storybook:app": "yarn workspace @romalms/webapp storybook",
+    "storybook:design-system": "yarn workspace @romalms/design-system storybook"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
