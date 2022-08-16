@@ -1,5 +1,5 @@
 {
-  "name": "lms-monorepo",
+  "name": "romalms",
   "private": true,
   "workspaces": [
     "@romalms/api",
