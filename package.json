@@ -2,13 +2,18 @@
   "name": "lms-monorepo",
   "private": true,
   "workspaces": [
-    "api",
-    "webapp",
-    "design-system"
+    "@romalms/api",
+    "@romalms/webapp",
+    "@romalms/design-system"
   ],
   "author": {
     "name": "Robert Martinez",
     "email": "robert.g.martinez.a@gmail.com"
+  },
+  "scripts": {
+    "start:app": "yarn dev --workspace=webapp",
+    "storybook:app": "yarn storybook --workspace=webapp",
+    "storybook:design-system": "yarn storybook --workspace=design-system"
   },
   "devDependencies": {
     "prettier": "^2.7.1",

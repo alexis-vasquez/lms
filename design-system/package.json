@@ -1,6 +1,5 @@
 {
-  "name": "design-system",
-  "private": true,
+  "name": "@romalms/design-system",
   "version": "0.0.0",
   "scripts": {
     "storybook": "start-storybook -p 6006",
@@ -26,5 +25,7 @@
     "@types/react-dom": "^18.0.0",
     "babel-loader": "^8.2.5",
     "typescript": "^4.6.3"
-  }
+  },
+  "main": "dist/index.js",
+  "license": "MIT"
 }
