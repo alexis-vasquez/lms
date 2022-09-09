@@ -11,6 +11,7 @@
     "email": "robert.g.martinez.a@gmail.com"
   },
   "scripts": {
+    "serve:api": "yarn workspace @romalms/api serve",
     "start:app": "yarn workspace @romalms/webapp dev",
     "storybook:app": "yarn workspace @romalms/webapp storybook",
     "storybook:design-system": "yarn workspace @romalms/design-system storybook"
