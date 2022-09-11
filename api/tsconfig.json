@@ -1,11 +1,11 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./src"],
+  "include": ["src"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "@src/*": ["./src/*"],
-      "@controllers/*": ["./src/controllers/*"]
+      "~/*": ["*"],
+      "@controllers/*": ["controllers/*"]
     }
   }
 }
