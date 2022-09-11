@@ -2,6 +2,8 @@
   "name": "@romalms/webapp",
   "version": "0.0.0",
   "scripts": {
+    "code:fix": "yarn eslint --fix && prettier --write .",
+    "code:check": "yarn eslint . && tsc --noEmit && prettier --check .",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
