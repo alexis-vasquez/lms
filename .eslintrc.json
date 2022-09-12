@@ -12,7 +12,7 @@
     "sourceType": "module",
     "project": ["./tsconfig.json"]
   },
-  "ignorePatterns": ["node_modules", "jest.config.js"],
+  "ignorePatterns": ["node_modules", "jest.config.js", "dist"],
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "camelcase": "error",
