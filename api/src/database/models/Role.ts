@@ -24,10 +24,10 @@ export const Role = sequelize.define(
 
 Role.belongsToMany(Privilege, {
   through: 'RolePrivileges',
-  timestamps: false
+  timestamps: false,
 });
 
 Privilege.belongsToMany(Role, {
   through: 'RolePrivileges',
-  timestamps: false
+  timestamps: false,
 });

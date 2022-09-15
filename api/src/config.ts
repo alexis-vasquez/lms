@@ -14,4 +14,5 @@ export const CONFIG = {
   DBUSER: process.env.POSTGRES_USER,
   DBPASS: process.env.POSTGRES_PASSWORD,
   DBPORT: Number(process.env.POSTGRES_PORT),
+  DBHOST: process.env.NODE_ENV === 'production' ? 'db' : 'localhost',
 };

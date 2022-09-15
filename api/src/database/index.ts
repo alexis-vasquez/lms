@@ -6,7 +6,7 @@ export const sequelize = new Sequelize(
   CONFIG.DBUSER,
   CONFIG.DBPASS,
   {
-    host: 'localhost',
+    host: CONFIG.DBHOST,
     dialect: 'postgres',
     port: CONFIG.DBPORT,
   }
