@@ -14,7 +14,8 @@ services:
   app:
     env_file: .env
     build: .
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 5; done; yarn docker:serve'
     ports:
       - 3001:${PORT}
     depends_on:
-      - db
+      - db    

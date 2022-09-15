@@ -1,5 +1,5 @@
-import { sequelize } from '@database';
 import { DataTypes } from 'sequelize';
+import { sequelize } from '..';
 
 export const Privilege = sequelize.define(
   'Privilege',

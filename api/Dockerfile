@@ -3,9 +3,11 @@ FROM node:16-alpine3.15
 # Create app directory and copy app files
 WORKDIR /app
 
-# Expected behavior after solving paths
 COPY dist .
 COPY package.json .
+
+RUN apk update && apk add bash
+SHELL ["/bin/bash", "-c"]
 
 # Install dependencies and build the app
 RUN yarn install --prod --frozen-lockfile

@@ -1,12 +1,12 @@
-import { sequelize } from '@database';
 import { app } from '~/app';
 import { CONFIG } from '~/config';
+import { sequelize } from './database';
 
 import './database/models';
 
 const main = async () => {
   try {
-    await sequelize.sync();
+    await sequelize.authenticate();
     // eslint-disable-next-line no-console
     console.log('Connection to database has been established successfully.');
     app.listen(CONFIG.PORT, () => {

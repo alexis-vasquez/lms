@@ -1,5 +1,5 @@
-import { sequelize } from '@database';
 import { DataTypes } from 'sequelize';
+import { sequelize } from '..';
 import { Role } from './Role';
 
 export const User = sequelize.define('User', {
