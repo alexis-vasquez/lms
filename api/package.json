@@ -11,7 +11,10 @@
     "docker:serve": "NODE_ENV=production node index.js",
     "docker:build": "yarn build && docker-compose up --build",
     "dev": "ts-node src/index.ts",
-    "postinstall": "npx typesync"
+    "postinstall": "npx typesync",
+    "data:migrate": "npx sequelize db:migrate",
+    "data:seed": "npx sequelize db:seed:all",
+    "data:init": "yarn data:migrate && yarn data:seed"
   },
   "dependencies": {
     "dotenv": "^16.0.2",

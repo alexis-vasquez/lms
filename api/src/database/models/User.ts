@@ -29,7 +29,12 @@ export const User = sequelize.define('User', {
   role: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: 2,
   },
 });
 
-User.belongsTo(Role, { foreignKey: 'role', targetKey: 'id' });
+User.belongsTo(Role, {
+  foreignKey: 'role',
+  targetKey: 'id',
+  onDelete: 'CASCADE',
+});
