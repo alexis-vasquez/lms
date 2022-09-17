@@ -27,6 +27,11 @@ module.exports = {
         unique: true,
         primaryKey: true,
       },
+      active: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
       role: {
         type: Sequelize.INTEGER,
         allowNull: false,
