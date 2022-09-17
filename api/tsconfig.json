@@ -6,9 +6,9 @@
     "baseUrl": "src",
     "paths": {
       "~/*": ["*"],
-      "@controllers/*": ["controllers/*"],
-      "@database": ["database"],
-      "@database/*": ["database/*"]
+      "@controllers/*": ["./controllers/*"],
+      "@database": ["./database"],
+      "@database/*": ["./database/*"]
     }
   }
 }

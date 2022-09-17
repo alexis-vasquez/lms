@@ -27,7 +27,8 @@
       "error",
       { "tsx": "never", "ts": "never" }
     ],
-    "@typescript-eslint/comma-dangle": "off"
+    "@typescript-eslint/comma-dangle": "off",
+    "arrow-body-style": "off"
   }
 }
 
