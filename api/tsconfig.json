@@ -5,10 +5,7 @@
     "outDir": "dist",
     "baseUrl": "src",
     "paths": {
-      "~/*": ["*"],
-      "@controllers/*": ["./controllers/*"],
-      "@database": ["./database"],
-      "@database/*": ["./database/*"]
+      "@/*": ["./*"]
     }
   }
 }

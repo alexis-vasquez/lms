@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from '~/app';
+import { app } from '@/app';
 
 describe('Auth Router', () => {
   test('It should response the POST method in login', async () => {

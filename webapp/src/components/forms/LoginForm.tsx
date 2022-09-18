@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useLoginMutation } from '~/services/AuthService';
+import { useLoginMutation } from '@/services/AuthService';
 
 export const LoginForm = () => {
   const { mutate } = useLoginMutation();

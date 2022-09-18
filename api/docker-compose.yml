@@ -18,4 +18,4 @@ services:
     ports:
       - 3001:${PORT}
     depends_on:
-      - db    
+      - db
