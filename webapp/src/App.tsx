@@ -1,5 +1,10 @@
 import { LoginPage } from '@/pages';
+import { AppContextProvider } from '@/context/AppContext';
 
 export function App() {
-  return <LoginPage />;
+  return (
+    <AppContextProvider>
+      <LoginPage />
+    </AppContextProvider>
+  );
 }

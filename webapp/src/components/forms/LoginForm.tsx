@@ -1,9 +1,10 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useLoginMutation } from '@/services/AuthService';
+import { useMutation } from '@tanstack/react-query';
+import { AuthService } from '@/services/AuthService';
 
 export const LoginForm = () => {
-  const { mutate } = useLoginMutation();
+  const { mutate } = useMutation(AuthService.login);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required(),
