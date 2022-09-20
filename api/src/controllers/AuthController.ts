@@ -18,11 +18,11 @@ export class AuthController {
       },
       raw: true,
     });
-    if (!user) return res.status(401).json({ message: 'User not found' });
+    if (!user) return res.status(401).json({ error: 'User not found' });
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword)
-      return res.status(401).json({ message: 'Invalid password' });
+      return res.status(401).json({ error: 'Invalid password' });
 
     // Remove the password from the response
     const { password: removedPassword, ...userWithoutPassword } = user;
