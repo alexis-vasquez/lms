@@ -1,21 +1,17 @@
 import { client } from './axiosClient';
 
-type LoginResponse = {
+type TokenResponse = {
   token: string;
 };
 
-type UserResponse = {
-  user: string;
-};
-
 export class AuthService {
-  static getUser = async () => {
-    const response = await client.get<UserResponse>('/auth/user');
+  static validateToken = async () => {
+    const response = await client.get<TokenResponse>('/auth');
     return response.data;
   };
 
   static login = async (values: { email: string; password: string }) => {
-    const response = await client.post<LoginResponse>('/auth/login', values);
+    const response = await client.post<TokenResponse>('/auth/login', values);
     return response.data;
   };
 }

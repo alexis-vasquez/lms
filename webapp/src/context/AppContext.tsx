@@ -1,27 +1,42 @@
 import { useQuery } from '@tanstack/react-query';
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, ReactNode, useContext, useEffect } from 'react';
 import { AuthService } from '@/services/AuthService';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 type AppContextType = {
-  user: string | null;
+  token: string | undefined;
+  setToken: (token: string | undefined) => void;
 };
 
 const AppContext = createContext<AppContextType>({
-  user: null,
+  token: undefined,
+  setToken: () => {},
 });
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
-  const { isFetching, data } = useQuery(['user'], AuthService.getUser, {
+  const { isFetching, data } = useQuery(['user'], AuthService.validateToken, {
     refetchOnWindowFocus: false,
     retry: false,
   });
+  const [token, setToken] = useLocalStorage<undefined | string>(
+    'token',
+    undefined
+  );
 
-  if (!data) return <h1>ERROR</h1>;
+  useEffect(() => {
+    if (!isFetching) {
+      setToken(data?.token);
+    }
+  }, [isFetching, data]);
 
-  return isFetching ? (
-    <h1>LOADING...</h1>
-  ) : (
-    <AppContext.Provider value={{ user: data.user  }}>{children}</AppContext.Provider>
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <AppContext.Provider value={{ token, setToken }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

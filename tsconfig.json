@@ -20,7 +20,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx"
   },
-  "exclude": ["node_modules", "**/*.test.ts", "**/*.test.tsx"],
+  "exclude": ["node_modules"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   }

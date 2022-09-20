@@ -2,10 +2,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '@/services/AuthService';
+import { useAppContext } from '@/context/AppContext';
 
 export const LoginForm = () => {
   const { mutate } = useMutation(AuthService.login);
-
+  const { setToken } = useAppContext();
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().required(),
@@ -18,7 +19,16 @@ export const LoginForm = () => {
       password: '',
     },
     onSubmit: (values) => {
-      mutate(values);
+      mutate(values, {
+        onSuccess: ({ token }) => {
+          setToken(token);
+        },
+        onError: (error) => {
+          // eslint-disable-next-line no-alert
+          alert(error);
+          formik.setValues((oldValues) => ({ ...oldValues, password: '' }));
+        },
+      });
     },
   });
 
