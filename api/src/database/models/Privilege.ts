@@ -1,7 +1,12 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '..';
 
-export const Privilege = sequelize.define(
+interface PrivilegeModel extends Model {
+  id: number;
+  name: string;
+}
+
+export const Privilege = sequelize.define<PrivilegeModel>(
   'Privilege',
   {
     id: {

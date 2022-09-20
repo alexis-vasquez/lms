@@ -1,8 +1,17 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '..';
 import { Role } from './Role';
 
-export const User = sequelize.define('User', {
+interface UserModel extends Model {
+  id: number;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  role: number;
+}
+
+export const User = sequelize.define<UserModel>('User', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

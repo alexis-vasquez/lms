@@ -9,5 +9,6 @@ export const sequelize = new Sequelize(
     host: CONFIG.DBHOST,
     dialect: 'postgres',
     port: CONFIG.DBPORT,
+    logging: false,
   }
 );

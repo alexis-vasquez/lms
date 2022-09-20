@@ -22,7 +22,7 @@ module.exports = {
           id: 2,
           firstName: 'Demo',
           lastName: 'Student',
-          email: 'studen@lms.com',
+          email: 'student@lms.com',
           password: await bcrypt.hash("123456", salt),
           role: 2,
           createdAt: new Date().toUTCString(),

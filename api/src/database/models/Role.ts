@@ -1,8 +1,13 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '..';
 import { Privilege } from './Privilege';
 
-export const Role = sequelize.define(
+interface RoleModel extends Model {
+  id: number;
+  name: string;
+}
+
+export const Role = sequelize.define<RoleModel>(
   'Role',
   {
     id: {
