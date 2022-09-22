@@ -1,40 +1,37 @@
 import { useQuery } from '@tanstack/react-query';
-import { createContext, ReactNode, useContext, useEffect } from 'react';
+import { createContext, PropsWithChildren, useContext } from 'react';
+import jwtDecode from 'jwt-decode';
 import { AuthService } from '@/services/AuthService';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-
-type AppContextType = {
-  token: string | undefined;
-  setToken: (token: string | undefined) => void;
-};
+import { AppContextType, User } from './types';
 
 const AppContext = createContext<AppContextType>({
-  token: undefined,
+  user: null,
   setToken: () => {},
 });
 
-export const AppContextProvider = ({ children }: { children: ReactNode }) => {
+export const AppContextProvider = ({ children }: PropsWithChildren) => {
+  const [savedToken, setToken] = useLocalStorage<undefined | string>(
+    'token',
+    undefined,
+  );
+
   const { isFetching, data } = useQuery(['user'], AuthService.validateToken, {
     refetchOnWindowFocus: false,
     retry: false,
-  });
-  const [token, setToken] = useLocalStorage<undefined | string>(
-    'token',
-    undefined
-  );
-
-  useEffect(() => {
-    if (!isFetching) {
-      setToken(data?.token);
+    onSuccess: ({ token }) => {
+      setToken(token);
     }
-  }, [isFetching, data]);
+  });
 
-  if (isFetching) {
+  if (isFetching || (data?.token && !savedToken)) {
     return <div>Loading...</div>;
   }
 
+  const user = savedToken ? jwtDecode<User>(savedToken) : null;
+
   return (
-    <AppContext.Provider value={{ token, setToken }}>
+    <AppContext.Provider value={{ user, setToken }}>
       {children}
     </AppContext.Provider>
   );
