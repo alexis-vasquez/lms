@@ -8,5 +8,5 @@ export interface User {
 
 export type AppContextType = {
   user: null | User;
-  setToken: (token: string | undefined) => void;
+  setToken: (token: string | undefined, session?: boolean) => void;
 };

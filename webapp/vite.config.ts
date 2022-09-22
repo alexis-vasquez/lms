@@ -8,8 +8,16 @@ export default defineConfig({
   server: {
     port: 8000,
   },
-  plugins: [react()],
+  plugins: [react({
+    jsxImportSource: '@emotion/react',
+    babel: {
+      plugins: ['@emotion/babel-plugin'],
+    },
+  })],
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, './src') }],
   },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  }
 });

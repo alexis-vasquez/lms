@@ -21,8 +21,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     refetchOnWindowFocus: false,
     retry: false,
     onSuccess: ({ token }) => {
-      setToken(token);
-    },
+      setToken(token, false);
+    }
   });
 
   if (isFetching || (data?.token && !savedToken)) {

@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "jsxImportSource": "@emotion/react",
     "lib": ["DOM", "DOM.Iterable", "ES2020"],
     "outDir": "dist",
     "baseUrl": "src",

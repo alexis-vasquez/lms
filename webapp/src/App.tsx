@@ -13,14 +13,24 @@ export function App() {
       <BrowserRouter>
         <Suspense fallback={<FallbackSpinner />}>
           <Routes>
-            {/* Private Routes */}
+            {/**
+             * Routes that are protected by authentication,
+             * only accessible if the user is logged in.
+             */}
             <Route element={<PrivateRoute />}>
               <Route path="/" element={<div>HOME</div>}></Route>
             </Route>
-            {/* Protected Routes */}
+            {/**
+             * Protected Routes
+             * Routes that are not accessible when the user is logged in
+             */}
             <Route element={<ProtectedRoute />}>
               <Route path="/login" element={<LoginPage />}></Route>
             </Route>
+            {/**
+             * Publick Routes
+             * Routes that are accessible to everyone
+             */}
           </Routes>
         </Suspense>
       </BrowserRouter>

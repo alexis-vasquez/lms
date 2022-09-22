@@ -15,7 +15,7 @@ export const useLocalStorage = <T,>(key: string, initialValue: T) => {
     }
   });
 
-  const setValue = (value: T | ((val: T) => T)) => {
+  const setValue = (value: T | ((val: T) => T), preserve = true) => {
     try {
       if (value === undefined) {
         window.localStorage.removeItem(key);
@@ -24,12 +24,14 @@ export const useLocalStorage = <T,>(key: string, initialValue: T) => {
       const valueToStore =
         value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
-      window.localStorage.setItem(
-        key,
-        typeof valueToStore === 'string'
-          ? valueToStore
-          : JSON.stringify(valueToStore)
-      );
+      if (preserve) {
+        window.localStorage.setItem(
+          key,
+          typeof valueToStore === 'string'
+            ? valueToStore
+            : JSON.stringify(valueToStore)
+        );
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
