@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { AuthService } from '@/services/AuthService';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { AppContextType, User } from './types';
+import { FallbackSpinner } from '@/components/FallbackSpinner';
 
 const AppContext = createContext<AppContextType>({
   user: null,
@@ -13,7 +14,7 @@ const AppContext = createContext<AppContextType>({
 export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [savedToken, setToken] = useLocalStorage<undefined | string>(
     'token',
-    undefined,
+    undefined
   );
 
   const { isFetching, data } = useQuery(['user'], AuthService.validateToken, {
@@ -21,11 +22,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     retry: false,
     onSuccess: ({ token }) => {
       setToken(token);
-    }
+    },
   });
 
   if (isFetching || (data?.token && !savedToken)) {
-    return <div>Loading...</div>;
+    return <FallbackSpinner />;
   }
 
   const user = savedToken ? jwtDecode<User>(savedToken) : null;

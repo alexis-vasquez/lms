@@ -1,5 +1,8 @@
+/* eslint-disable import/no-default-export */
 import { LoginForm } from '@/components/forms/LoginForm';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return <LoginForm />;
 };
+
+export default LoginPage;

@@ -41,6 +41,7 @@ export const LoginForm = () => {
         type="email"
         value={formik.values.email}
         onChange={formik.handleChange}
+        autoComplete="email"
       />
       <label htmlFor="password">Password</label>
       <input
@@ -49,6 +50,7 @@ export const LoginForm = () => {
         type="password"
         value={formik.values.password}
         onChange={formik.handleChange}
+        autoComplete="current-password"
       />
       <button type="submit">Login</button>
     </form>
