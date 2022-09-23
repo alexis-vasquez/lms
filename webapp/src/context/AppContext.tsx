@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { createContext, PropsWithChildren, useContext } from 'react';
 import jwtDecode from 'jwt-decode';
+import { AxiosError } from 'axios';
 import { AuthService } from '@/services/AuthService';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { AppContextType, User } from './types';
@@ -22,7 +23,12 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     retry: false,
     onSuccess: ({ token }) => {
       setToken(token, false);
-    }
+    },
+    onError: ({ response }: AxiosError) => {
+      if (response?.status === 401) {
+        setToken(undefined);
+      }
+    },
   });
 
   if (isFetching || (data?.token && !savedToken)) {

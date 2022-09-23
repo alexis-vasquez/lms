@@ -78,7 +78,7 @@ describe('Validation utils', () => {
         },
       };
       validateToken(req, res as unknown as Response, next);
-      expect(res.status).toHaveBeenCalledWith(403);
+      expect(res.status).toHaveBeenCalledWith(401);
       expect(res.json).toHaveBeenCalledWith({
         error: 'Invalid token',
       });

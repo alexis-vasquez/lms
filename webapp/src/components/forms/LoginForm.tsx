@@ -16,10 +16,10 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    height: '100%',
     maxWidth: 500,
-    flexGrow: 1,
+    width: '100%',
     padding: 20,
+    marginTop: 20
   })
 };
 
