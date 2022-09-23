@@ -4,7 +4,7 @@ import { validateFields, validateToken } from '@/utils/validation';
 
 export const authRouter = Router();
 
-authRouter.get('/', validateToken);
+authRouter.get('/', validateToken, AuthController.authenticate);
 authRouter.post(
   '/login',
   validateFields(['email', 'password']),

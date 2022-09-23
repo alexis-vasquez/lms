@@ -14,16 +14,19 @@ export const validateFields = (fields: string[]) => {
   };
 };
 
-export const validateToken = (req: Request, res: Response) => {
-  const token = req.headers.authorization;
-  if (!token) {
-    res.status(401).json({ error: 'Missing token' });
-    return;
+export const validateToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const token = req.headers.authorization;
+    if (!token) {
+      return res.status(401).json({ error: 'Missing token' });
+    }
+    jwt.verify(token, 'test');
+  } catch {
+    return res.status(403).json({ error: 'Invalid token' });
   }
-  const isValidToken = jwt.verify(token, 'test');
-  if (!isValidToken) {
-    res.status(401).json({ error: 'Invalid token' });
-    return;
-  }
-  res.json({ token });
+  return next();
 };

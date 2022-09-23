@@ -5,6 +5,11 @@ import jwt from 'jsonwebtoken';
 import { Role, User } from '@/database/models';
 
 export class AuthController {
+  static authenticate: RequestHandler = async (req, res) => {
+    const token = req.headers.authorization;
+    res.json({ token });
+  };
+
   static login: RequestHandler = async (req, res) => {
     const { email, password } = req.body;
 

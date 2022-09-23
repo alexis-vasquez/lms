@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '..';
 import { Role } from './Role';
 
-interface UserModel extends Model {
+export interface UserModel extends Model {
   id: number;
   email: string;
   password: string;
