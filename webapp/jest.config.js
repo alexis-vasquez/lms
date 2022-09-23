@@ -1,6 +1,11 @@
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  // Sync with ./tsconfig.json paths
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)': '<rootDir>/src/$1',
   },
+  setupFilesAfterEnv: [
+    '<rootDir>/src/test/test.setup.ts',
+  ],
 };

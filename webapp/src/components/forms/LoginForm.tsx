@@ -1,11 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Alert, Button, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
+import { AxiosError } from 'axios';
 import { AuthService } from '@/services/AuthService';
 import { useAppContext } from '@/context/AppContext';
+import { useErrorMessage } from '@/hooks/useErrorMessage';
 
-type LoginFormValues = {
+export type LoginFormValues = {
   email: string;
   password: string;
   remember: boolean;
@@ -19,12 +21,16 @@ const styles = {
     maxWidth: 500,
     width: '100%',
     padding: 20,
-    marginTop: 20
+    marginTop: 20,
+  }),
+  errorMessage: css({
+    marginBottom: 20,
   })
 };
 
 export const LoginForm = () => {
-  const { mutate } = useMutation(AuthService.login);
+  const { mutate, error } = useMutation(AuthService.login);
+  const errorMessage = useErrorMessage(error as AxiosError<{ error: string }>);
   const { setToken } = useAppContext();
   const [form] = Form.useForm();
 
@@ -34,9 +40,8 @@ export const LoginForm = () => {
       onSuccess: ({ token }) => {
         setToken(token, remember);
       },
-      onError: (error) => {
+      onError: () => {
         // eslint-disable-next-line no-alert
-        alert(error);
         form.setFieldValue('password', '');
       },
     });
@@ -62,7 +67,13 @@ export const LoginForm = () => {
       <Form.Item
         name="email"
         label="Email"
-        rules={[{ required: true, message: 'Please input your Email!', type: 'email' }]}
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Email!',
+            type: 'email',
+          },
+        ]}
       >
         <Input prefix={<UserOutlined />} placeholder="Email" />
       </Form.Item>
@@ -75,6 +86,7 @@ export const LoginForm = () => {
           prefix={<LockOutlined />}
           type="password"
           placeholder="Password"
+          role="textbox"
         />
       </Form.Item>
       <Form.Item>
@@ -82,7 +94,7 @@ export const LoginForm = () => {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
       </Form.Item>
-
+      {errorMessage && <Alert message={errorMessage} type="error" showIcon css={styles.errorMessage} />}
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Log in
