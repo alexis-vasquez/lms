@@ -7,7 +7,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { AppContextType, User } from './types';
 import { FallbackSpinner } from '@/components/FallbackSpinner';
 
-const AppContext = createContext<AppContextType>({
+export const AppContext = createContext<AppContextType>({
   user: null,
   setToken: () => {},
 });
@@ -17,6 +17,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     'token',
     undefined
   );
+  // savedToken undefined means that the user has not logged in yet
 
   const { isFetching, data } = useQuery(['user'], AuthService.validateToken, {
     refetchOnWindowFocus: false,
@@ -30,6 +31,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       }
     },
   });
+
 
   if (isFetching || (data?.token && !savedToken)) {
     return <FallbackSpinner />;

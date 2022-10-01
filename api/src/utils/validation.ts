@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { CONFIG } from '@/config';
 
 export const validateFields = (fields: string[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -24,7 +25,7 @@ export const validateToken = (
     if (!token) {
       return res.status(401).json({ error: 'Missing token' });
     }
-    jwt.verify(token, 'test');
+    jwt.verify(token, CONFIG.JWT_SECRET);
   } catch {
     return res.status(401).json({ error: 'Invalid token' });
   }

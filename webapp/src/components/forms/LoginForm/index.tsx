@@ -25,7 +25,7 @@ const styles = {
   }),
   errorMessage: css({
     marginBottom: 20,
-  })
+  }),
 };
 
 export const LoginForm = () => {
@@ -91,10 +91,17 @@ export const LoginForm = () => {
       </Form.Item>
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox name="Remember me">Remember me</Checkbox>
         </Form.Item>
       </Form.Item>
-      {errorMessage && <Alert message={errorMessage} type="error" showIcon css={styles.errorMessage} />}
+      {errorMessage && (
+        <Alert
+          message={errorMessage}
+          type="error"
+          showIcon
+          css={styles.errorMessage}
+        />
+      )}
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Log in

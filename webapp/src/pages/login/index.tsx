@@ -5,7 +5,6 @@ import { AntDesignOutlined } from '@ant-design/icons';
 import { LoginForm } from '@/components/forms/LoginForm';
 import backgroundImage from '@/assets/login-background.jpg';
 
-
 const styles = {
   container: css({
     backgroundImage: `url(${backgroundImage})`,
