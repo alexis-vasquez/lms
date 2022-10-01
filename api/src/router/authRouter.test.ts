@@ -8,30 +8,39 @@ jest.mock('jsonwebtoken', () => ({
   sign: jest.fn().mockReturnValue('correct token'),
 }));
 
-jest.mock('@/database/models', () => ({
-  User: {
-    findOne: jest.fn((query) => {
-      if (query.where.email !== 'test@lms.com') return undefined;
-      return {
-        id: 1,
-        email: 'test@lms.com',
-        password: '12345678',
-        role: 'admin',
-      };
-    }),
-  },
-}));
+jest.mock('@/database/models', () => {
+  let createdUser = false;
+  return {
+    User: {
+      findOne: jest.fn((query) => {
+        if (query.where.email === 'validuser@lms.com' && !createdUser) {
+          createdUser = true;
+          return undefined;
+        }
+        if (query.where.email === 'unknownuser@lms.com') return undefined;
+        return {
+          id: 1,
+          email: 'test@lms.com',
+          password: '12345678',
+          role: 'admin',
+        };
+      }),
+      create: jest.fn(),
+    },
+  };
+});
 
 jest.mock('bcryptjs', () => ({
   compare: jest.fn((password: string) => {
-    if (password !== '12345678') return false;
+    if (password !== 'correct') return false;
     return true;
   }),
+  hash: jest.fn((password: string) => password),
 }));
 
 describe('Auth Router', () => {
   describe('Authentication', () => {
-    test('It should validate existing token', async () => {
+    test('It should require token', async () => {
       const response = await request(app).get('/api/auth/');
       expect(response.headers['content-type']).toMatch(/application\/json/);
       expect(response.statusCode).toBe(401);
@@ -43,7 +52,7 @@ describe('Auth Router', () => {
         .get('/api/auth/')
         .set({ Authorization: 'wrong token' });
       expect(response.headers['content-type']).toMatch(/application\/json/);
-      expect(response.statusCode).toBe(403);
+      expect(response.statusCode).toBe(401);
       expect(response.body.error).toBe('Invalid token');
     });
 
@@ -75,7 +84,7 @@ describe('Auth Router', () => {
     test('It should return invalid email message', async () => {
       const response = await request(app)
         .post('/api/auth/login')
-        .send({ email: 'test@test.com', password: '12345678' });
+        .send({ email: 'unknownuser@lms.com', password: 'correct' });
       expect(response.statusCode).toBe(401);
       expect(response.body.error).toBe('User not found');
     });
@@ -83,7 +92,7 @@ describe('Auth Router', () => {
     test('It should return invalid password message', async () => {
       const response = await request(app)
         .post('/api/auth/login')
-        .send({ email: 'test@lms.com', password: '123456' });
+        .send({ email: 'test@lms.com', password: 'wrong' });
       expect(response.statusCode).toBe(401);
       expect(response.body.error).toBe('Invalid password');
     });
@@ -91,7 +100,49 @@ describe('Auth Router', () => {
     test('It should login with correct credentials', async () => {
       const response = await request(app)
         .post('/api/auth/login')
-        .send({ email: 'test@lms.com', password: '12345678' });
+        .send({ email: 'test@lms.com', password: 'correct' });
+      expect(response.statusCode).toBe(200);
+      expect(response.body.token).toBe('correct token');
+    });
+  });
+
+  describe('Register', () => {
+    test('It should require all fields when register', async () => {
+      const response = await request(app).post('/api/auth/register').send({});
+      expect(response.statusCode).toBe(400);
+      expect(response.body.error).toBe(
+        'Missing fields: email, password, firstName, lastName'
+      );
+    });
+
+    test('It should require missing fields when register', async () => {
+      const response = await request(app)
+        .post('/api/auth/register')
+        .send({ email: 'test@test.com', password: 'any' });
+      expect(response.statusCode).toBe(400);
+      expect(response.body.error).toBe('Missing fields: firstName, lastName');
+    });
+
+    test('It should return an error when user already exist', async () => {
+      const response = await request(app).post('/api/auth/register').send({
+        email: 'existinguser@test.com',
+        password: 'any',
+        firstName: 'test',
+        lastName: 'test',
+      });
+      expect(response.statusCode).toBe(409);
+      expect(response.body.error).toBe(
+        'An user with this email already exists'
+      );
+    });
+
+    test('It should register with correct credentials', async () => {
+      const response = await request(app).post('/api/auth/register').send({
+        email: 'validuser@lms.com',
+        password: 'any',
+        firstName: 'test',
+        lastName: 'test',
+      });
       expect(response.statusCode).toBe(200);
       expect(response.body.token).toBe('correct token');
     });
