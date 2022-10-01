@@ -10,3 +10,8 @@ authRouter.post(
   validateFields(['email', 'password']),
   AuthController.login
 );
+authRouter.post(
+  '/register',
+  validateFields(['email', 'password', 'firstName', 'lastName']),
+  AuthController.register
+);

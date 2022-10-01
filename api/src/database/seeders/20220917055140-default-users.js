@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const salt = await bcrypt.genSalt(8);
+    const saltRounds = 9;
     await queryInterface.bulkInsert(
       'Users',
       [
@@ -13,7 +13,7 @@ module.exports = {
           firstName: 'Super',
           lastName: 'Admin',
           email: 'superadmin@lms.com',
-          password: await bcrypt.hash("123456", salt),
+          password: await bcrypt.hash("123456", saltRounds),
           role: 1,
           createdAt: new Date().toUTCString(),
           updatedAt: new Date().toUTCString(),
@@ -23,7 +23,7 @@ module.exports = {
           firstName: 'Demo',
           lastName: 'Student',
           email: 'student@lms.com',
-          password: await bcrypt.hash("123456", salt),
+          password: await bcrypt.hash("123456", saltRounds),
           role: 2,
           createdAt: new Date().toUTCString(),
           updatedAt: new Date().toUTCString(),

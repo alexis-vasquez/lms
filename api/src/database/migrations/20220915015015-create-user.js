@@ -35,11 +35,10 @@ module.exports = {
       role: {
         type: Sequelize.INTEGER,
         defaultValue: 2,
-        allowNull: false,
+        onDelete: 'SET DEFAULT',
         references: {
           model: 'Roles',
           key: 'id',
-          onDelete: 'CASCADE',
         },
       },
       createdAt: {
