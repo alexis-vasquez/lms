@@ -1,6 +1,9 @@
+/**
+ * @vitest-environment jsdom
+ */
 import { userEvent } from '@storybook/testing-library';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { describe, it, expect, vi } from 'vitest';
 import { LoginForm } from '.';
@@ -11,32 +14,21 @@ describe('LoginForm', () => {
   const emailText = 'test@test.com';
   const passwordText = 'password';
   const errorMessage = 'Invalid credentials';
-
-  const server = setupServer();
-
-  server.use(
-    rest.post<{ email: string; password: string }>(
-      '/auth/login',
-      (req, res, ctx) => {
-        const { email, password } = req.body;
-        if (email === emailText && password === passwordText) {
-          return res(ctx.status(200), ctx.json({ token: 'token' }));
-        }
-        return res(ctx.status(401), ctx.json({ error: errorMessage }));
-      }
-    )
-  );
-
+  
+  const server = setupServer({ onPendingRequests: 'error' });
+  
   const setToken = vi.fn();
 
   function renderTestComponent() {
     const queryClient = new QueryClient();
     render(
       <QueryClientProvider client={queryClient}>
-        <AppContext.Provider value={{
-          user: null,
-          setToken,
-        }}>
+        <AppContext.Provider
+          value={{
+            user: null,
+            setToken,
+          }}
+        >
           <LoginForm />
         </AppContext.Provider>
       </QueryClientProvider>
@@ -68,7 +60,7 @@ describe('LoginForm', () => {
     screen.queryByText('Please input your Password!');
   });
 
-  it.skip('Should show error message when password is invalid', async () => {
+  it('Should show error message when password is invalid', async () => {
     renderTestComponent();
 
     const emailInput = screen.getByRole('textbox', { name: /Email/ });
@@ -83,7 +75,16 @@ describe('LoginForm', () => {
     await screen.findByText('Please input your Password!');
   });
 
-  it.skip('Should show error message from API', async () => {
+  it('Should show error message from API', async () => {
+    server.use(
+      rest.post<{ email: string; password: string }>(
+        '/api/auth/login',
+        (req, res, ctx) => {
+          return res(ctx.status(401), ctx.json({ error: errorMessage }));
+        }
+      )
+    );
+  
     renderTestComponent();
 
     const emailInput = screen.getByRole('textbox', { name: /Email/ });
@@ -98,10 +99,20 @@ describe('LoginForm', () => {
       submitButton.click();
     });
 
-    await waitForRequest(server, 'get', 'http://localhost:3000/api/auth/login' );
+    await waitForRequest(server, 'post', 'api/auth/login');
+    await screen.findByText(errorMessage);
   });
 
   it('Should submit form correctly', async () => {
+    server.use(
+      rest.post<{ email: string; password: string }>(
+        '/api/auth/login',
+        (req, res, ctx) => {
+          return res(ctx.status(200), ctx.json({ token: 'token' }));
+        }
+      )
+    );
+
     renderTestComponent();
 
     const emailInput = screen.getByRole('textbox', { name: /Email/ });
@@ -116,7 +127,10 @@ describe('LoginForm', () => {
       submitButton.click();
     });
 
+    await waitForRequest(server, 'post', '/api/auth/login');
+
+
     expect(screen.queryByText(errorMessage)).toBeNull();
-    expect(setToken).toBeCalledWith('token');
+    await waitFor(() => expect(setToken).toHaveBeenCalledOnce());
   });
 });

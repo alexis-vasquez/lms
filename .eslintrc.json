@@ -10,7 +10,9 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": ["./tsconfig.json"]
+    "project": ["./tsconfig.json"],
+    "extraFileExtensions": [".mock"]
+    
   },
   "ignorePatterns": ["node_modules", "jest.config.js", "dist"],
   "plugins": ["react", "@typescript-eslint"],

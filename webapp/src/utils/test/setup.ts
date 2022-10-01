@@ -1,11 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable default-case */
-import { beforeAll, beforeEach, afterEach, afterAll } from 'vitest';
+import { beforeAll, beforeEach, afterEach, afterAll, vi } from 'vitest';
 import { matchRequestUrl, RequestHandler, MockedRequest } from 'msw';
 import { setupServer as setupMsw, SetupServerApi } from 'msw/node';
 import { cleanup, waitFor } from '@testing-library/react';
-
 
 export type SetupServerOptions = {
   onPendingRequests?: 'error' | 'warn';
@@ -166,3 +165,17 @@ export function waitForRequest(
       })
   );
 }
+
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(), // deprecated
+    removeListener: vi.fn(), // deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});

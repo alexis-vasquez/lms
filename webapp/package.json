@@ -37,10 +37,12 @@
     "@storybook/builder-vite": "^0.1.38",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/jsdom": "^20.0.0",
     "@types/prettier": "^2.7.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "happy-dom": "^6.0.4",
+    "jsdom": "^20.0.0",
     "msw": "^0.47.3",
     "prettier": "^2.7.1",
     "vitest": "^0.23.4"
