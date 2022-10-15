@@ -1,11 +1,6 @@
-/**
- * @vitest-environment jsdom
- */
-import { userEvent } from '@storybook/testing-library';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
-import { describe, it, expect, vi } from 'vitest';
 import { LoginForm } from '.';
 import { setupServer, waitForRequest } from '@/utils/test/setup';
 import { AppContext } from '@/context/AppContext';
@@ -17,7 +12,7 @@ describe('LoginForm', () => {
   
   const server = setupServer({ onPendingRequests: 'error' });
   
-  const setToken = vi.fn();
+  const setToken = jest.fn();
 
   function renderTestComponent() {
     const queryClient = new QueryClient();
