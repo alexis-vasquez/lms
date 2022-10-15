@@ -1,35 +1,25 @@
 {
-  "name": "romalms",
+  "name": "lms",
+  "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "api",
-    "webapp",
-    "design-system"
+    "apps/*",
+    "packages/*"
   ],
-  "author": {
-    "name": "Robert Martinez",
-    "email": "robert.g.martinez.a@gmail.com"
-  },
   "scripts": {
-    "serve:api": "yarn workspace @romalms/api serve",
-    "start:app": "yarn workspace @romalms/webapp dev",
-    "storybook:app": "yarn workspace @romalms/webapp storybook",
-    "storybook:design-system": "yarn workspace @romalms/design-system storybook"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "prettier": "^2.7.1",
-    "@typescript-eslint/eslint-plugin": "^5.30.5",
-    "@typescript-eslint/parser": "^5.30.5",
-    "eslint": "^7.32.0 || ^8.2.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.2.2",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.30.1",
-    "typescript": "^4.7.4",
-    "sass": "^1.53.0"
+    "eslint-config-custom": "*",
+    "prettier": "latest",
+    "turbo": "latest"
   },
-  "license": "MIT"
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "packageManager": "yarn@1.22.18"
 }
