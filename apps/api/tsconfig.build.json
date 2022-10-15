@@ -1,4 +1,4 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "@romalms/tsconfig/base.json",
   "exclude": ["**/*.test.ts", "**/*.test.tsx"],
 }

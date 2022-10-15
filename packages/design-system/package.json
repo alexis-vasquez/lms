@@ -5,6 +5,8 @@
   "types": "./index.tsx",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
     "lint": "TIMING=1 eslint \"**/*.ts*\""
   },
   "devDependencies": {

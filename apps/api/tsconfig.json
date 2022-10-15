@@ -1,6 +1,7 @@
 {
-  "extends": "../tsconfig.json",
-  "include": ["src"],
+  "extends": "@romalms/tsconfig/base.json",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "outDir": "dist",
     "baseUrl": "src",
