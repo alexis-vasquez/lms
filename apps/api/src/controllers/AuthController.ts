@@ -2,8 +2,8 @@ import { RequestHandler } from 'express';
 import bcrypt from 'bcryptjs';
 import { Sequelize } from 'sequelize';
 import jwt from 'jsonwebtoken';
-import { Role, User } from '@/database/models';
-import { CONFIG } from '@/config';
+import { Role, User } from '../database/models';
+import { CONFIG } from '../config';
 
 const saltRounds = 9;
 

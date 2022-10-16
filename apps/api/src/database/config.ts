@@ -1,5 +1,5 @@
 import { Options } from 'sequelize';
-import { CONFIG } from '@/config';
+import { CONFIG } from '../config';
 
 const DBCONFIG: Options = {
   username: CONFIG.DBUSER,

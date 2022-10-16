@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "docker build .",
-    "build": "docker run --env-file ./env -p 5432:5432 -d postgres:13.8"
+    "dev": "docker-compose up -d"
   },
   "author": "Romanize",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv-cli": "^6.0.0"
+  }
 }

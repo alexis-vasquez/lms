@@ -17,13 +17,13 @@
       "cache": false
     }
   },
-  "globalDependencies": [
-    "$NODE_ENV",
-    "$PORT",
-    "$JWT_SECRET",
-    "$POSTGRES_USER",
-    "$POSTGRES_PASSWORD",
-    "$POSTGRES_DB",
-    "$POSTGRES_PORT"
+  "globalEnv": [
+    "NODE_ENV",
+    "PORT",
+    "JWT_SECRET",
+    "POSTGRES_USER",
+    "POSTGRES_PASSWORD",
+    "POSTGRES_DB",
+    "POSTGRES_PORT"
   ]
 }

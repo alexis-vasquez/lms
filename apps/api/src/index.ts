@@ -1,6 +1,6 @@
-import { sequelize } from '@/database';
 import { app } from './app';
 import { CONFIG } from './config';
+import { sequelize } from './database';
 
 import './database/models';
 
