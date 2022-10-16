@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "dotenv turbo run dev --parallel",
+    "dev": "dotenv -c -- turbo run dev --parallel",
     "dev:be": "dotenv -c -- turbo run dev --filter=api...",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
