@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "code:fix": "yarn eslint --fix && prettier --write .",
     "code:check": "yarn eslint . && tsc --noEmit && prettier --check .",
     "test": "jest",

@@ -3,9 +3,9 @@ import { Alert, Button, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
 import { AxiosError } from 'axios';
-import { AuthService } from '@/services/AuthService';
-import { useAppContext } from '@/context/AppContext';
+import { useAuthService } from '@/services/AuthService';
 import { useErrorMessage } from '@/hooks/useErrorMessage';
+import { useAuthContext } from '@/context/AuthContext';
 
 export type LoginFormValues = {
   email: string;
@@ -29,9 +29,10 @@ const styles = {
 };
 
 export const LoginForm = () => {
+  const AuthService = useAuthService();
   const { mutate, error } = useMutation(AuthService.login);
   const errorMessage = useErrorMessage(error as AxiosError<{ error: string }>);
-  const { setToken } = useAppContext();
+  const { setToken } = useAuthContext();
   const [form] = Form.useForm();
 
   const handleSubmit = (values: LoginFormValues) => {

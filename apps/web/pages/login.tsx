@@ -4,6 +4,8 @@ import { css } from '@emotion/react';
 import backgroundImage from '@/assets/login-background.jpg';
 import { LoginForm } from '@/components/forms/LoginForm';
 import { DefaultAvatar } from '@romalms/design-system';
+import { NextPage } from 'next';
+import { protectedPage } from '../router';
 
 const styles = {
   container: css({
@@ -27,7 +29,7 @@ const styles = {
   }),
 };
 
-const LoginPage = () => {
+const LoginPage: NextPage = () => {
   return (
     <div css={styles.container}>
       <div css={styles.content}>
@@ -38,4 +40,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default protectedPage(LoginPage);

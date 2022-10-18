@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 export const FallbackSpinner = () => {
   return (
     <div
-      style={{
+      css={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

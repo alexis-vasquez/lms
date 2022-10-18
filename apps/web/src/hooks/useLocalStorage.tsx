@@ -17,7 +17,7 @@ export const useLocalStorage = <T,>(key: string, initialValue: T) => {
 
   const setValue = (value: T | ((val: T) => T), preserve = true) => {
     try {
-      if (value === undefined) {
+      if (value === null) {
         window.localStorage.removeItem(key);
         return;
       }

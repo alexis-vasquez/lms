@@ -21,7 +21,4 @@
     "jsx": "react-jsx"
   },
   "exclude": ["node_modules"],
-  "ts-node": {
-    "require": ["tsconfig-paths/register"]
-  }
 }

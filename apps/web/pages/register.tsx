@@ -1,4 +1,5 @@
-/* eslint-disable import/no-default-export */
-const RegisterPage = () => null;
+import { NextPage } from "next";
+
+const RegisterPage: NextPage = () => null;
 
 export default RegisterPage;
