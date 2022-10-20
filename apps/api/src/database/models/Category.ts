@@ -4,6 +4,7 @@ import { sequelize } from '..';
 interface CategoryModel extends Model {
   id: number;
   name: string;
+  description: string;
 }
 
 export const Category = sequelize.define<CategoryModel>(
