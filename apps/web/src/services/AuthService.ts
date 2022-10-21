@@ -1,3 +1,5 @@
+import { LoginFormValues } from "@/components/forms/LoginForm";
+import { RegisterFormValues } from "@/components/forms/RegisterForm";
 import { useAxiosClient } from "./axiosClient";
 
 type TokenResponse = {
@@ -12,8 +14,16 @@ export const useAuthService = () => {
       return response.data;
     };
 
-    static login = async (values: { email: string; password: string }) => {
+    static login = async (values: Omit<LoginFormValues, "remember">) => {
       const response = await client.post<TokenResponse>("/auth/login", values);
+      return response.data;
+    };
+
+    static register = async (values: Omit<RegisterFormValues, "remember">) => {
+      const response = await client.post<TokenResponse>(
+        "/auth/register",
+        values
+      );
       return response.data;
     };
   };

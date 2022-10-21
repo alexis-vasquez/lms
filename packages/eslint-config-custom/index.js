@@ -6,5 +6,6 @@ module.exports = {
     "react/jsx-key": "off",
     "import/no-extraneous-dependencies": "error",
     "prettier/prettier": "error",
+    "react/no-unescaped-entities": "off",
   },
 };
