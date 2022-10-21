@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 import { LoginForm } from ".";
 import { setupServer, waitForRequest } from "@/utils/test/setup";

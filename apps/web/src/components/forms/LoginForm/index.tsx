@@ -1,11 +1,18 @@
-import { useMutation } from '@tanstack/react-query';
-import { Alert, Button, Checkbox, Form, Input } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { css } from '@emotion/react';
-import { AxiosError } from 'axios';
-import { useAuthService } from '@/services/AuthService';
-import { useErrorMessage } from '@/hooks/useErrorMessage';
-import { useAuthContext } from '@/context/AuthContext';
+import { useMutation } from "@tanstack/react-query";
+import {
+  Alert,
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  LockOutlined,
+  UserOutlined,
+} from "@romalms/design-system";
+import { css } from "@emotion/react";
+import { AxiosError } from "axios";
+import { useAuthService } from "@/services/AuthService";
+import { useErrorMessage } from "@/hooks/useErrorMessage";
+import { useAuthContext } from "@/context/AuthContext";
 
 export type LoginFormValues = {
   email: string;
@@ -15,11 +22,11 @@ export type LoginFormValues = {
 
 const styles = {
   form: css({
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
     maxWidth: 500,
-    width: '100%',
+    width: "100%",
     padding: 20,
     marginTop: 20,
   }),
@@ -42,14 +49,14 @@ export const LoginForm = () => {
         setToken(token, remember);
       },
       onError: () => {
-        form.setFieldValue('password', '');
+        form.setFieldValue("password", "");
       },
     });
   };
 
   const initialValues: LoginFormValues = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     remember: true,
   };
 
@@ -70,8 +77,8 @@ export const LoginForm = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your Email!',
-            type: 'email',
+            message: "Please input your Email!",
+            type: "email",
           },
         ]}
       >
@@ -80,7 +87,7 @@ export const LoginForm = () => {
       <Form.Item
         label="Password"
         name="password"
-        rules={[{ required: true, message: 'Please input your Password!' }]}
+        rules={[{ required: true, message: "Please input your Password!" }]}
       >
         <Input
           prefix={<LockOutlined />}
