@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export const useLocalStorage = <T,>(key: string, initialValue: T) => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
-      if (typeof item === 'string') {
+      if (typeof item === "string") {
         return item;
       }
       return item ? JSON.parse(item) : initialValue;
@@ -28,7 +28,7 @@ export const useLocalStorage = <T,>(key: string, initialValue: T) => {
       if (preserve) {
         window.localStorage.setItem(
           key,
-          typeof valueToStore === 'string'
+          typeof valueToStore === "string"
             ? valueToStore
             : JSON.stringify(valueToStore)
         );

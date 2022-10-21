@@ -1,5 +1,5 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '..';
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "..";
 
 interface CategoryModel extends Model {
   id: number;
@@ -8,21 +8,21 @@ interface CategoryModel extends Model {
 }
 
 export const Category = sequelize.define<CategoryModel>(
-  'Category',
+  "Category",
   {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        unique: true,
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      description: {
-        type: DataTypes.STRING,
-      },
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      unique: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+    },
   },
   {
     timestamps: false,

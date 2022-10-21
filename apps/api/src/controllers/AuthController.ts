@@ -1,9 +1,9 @@
-import { RequestHandler } from 'express';
-import bcrypt from 'bcryptjs';
-import { Sequelize } from 'sequelize';
-import jwt from 'jsonwebtoken';
-import { Role, User } from '../database/models';
-import { CONFIG } from '../config';
+import { RequestHandler } from "express";
+import bcrypt from "bcryptjs";
+import { Sequelize } from "sequelize";
+import jwt from "jsonwebtoken";
+import { Role, User } from "../database/models";
+import { CONFIG } from "../config";
 
 const saltRounds = 9;
 
@@ -20,17 +20,17 @@ export class AuthController {
       where: { email },
       include: [{ model: Role, attributes: [] }],
       attributes: {
-        exclude: ['createdAt', 'updatedAt', 'role'],
+        exclude: ["createdAt", "updatedAt", "role"],
         // Rename the column name from 'role.name' to 'role'
-        include: [[Sequelize.col('"Role"."name"'), 'role']],
+        include: [[Sequelize.col('"Role"."name"'), "role"]],
       },
       raw: true,
     });
-    if (!user) return res.status(401).json({ error: 'User not found' });
+    if (!user) return res.status(401).json({ error: "User not found" });
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword)
-      return res.status(401).json({ error: 'Invalid password' });
+      return res.status(401).json({ error: "Invalid password" });
 
     // Remove the password from the response
     const { password: removedPassword, ...userWithoutPassword } = user;
@@ -47,31 +47,30 @@ export class AuthController {
     if (user)
       return res
         .status(409)
-        .json({ error: 'An user with this email already exists' });
+        .json({ error: "An user with this email already exists" });
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    await User.create(
-      {
-        firstName,
-        lastName,
-        email,
-        password: hashedPassword,
-        role: 2,
-      },
-    );
+    await User.create({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      role: 2,
+    });
 
     const createdUser = await User.findOne({
       where: { email },
       include: [{ model: Role, attributes: [] }],
       attributes: {
-        exclude: ['createdAt', 'updatedAt', 'role', 'password'],
+        exclude: ["createdAt", "updatedAt", "role", "password"],
         // Rename the column name from 'role.name' to 'role'
-        include: [[Sequelize.col('"Role"."name"'), 'role']],
+        include: [[Sequelize.col('"Role"."name"'), "role"]],
       },
       raw: true,
     });
 
-    if (!createdUser) return res.status(500).json({ error: 'User could not be created' });
+    if (!createdUser)
+      return res.status(500).json({ error: "User could not be created" });
 
     const token = jwt.sign(createdUser, CONFIG.JWT_SECRET, { expiresIn: 300 });
     return res.json({ token });

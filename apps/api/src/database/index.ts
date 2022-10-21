@@ -1,5 +1,5 @@
-import { Sequelize } from 'sequelize';
-import { CONFIG } from '../config';
+import { Sequelize } from "sequelize";
+import { CONFIG } from "../config";
 
 export const sequelize = new Sequelize(
   CONFIG.DBNAME,
@@ -7,7 +7,7 @@ export const sequelize = new Sequelize(
   CONFIG.DBPASS,
   {
     host: CONFIG.DBHOST,
-    dialect: 'postgres',
+    dialect: "postgres",
     port: CONFIG.DBPORT,
     logging: false,
   }

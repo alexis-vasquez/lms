@@ -1,5 +1,5 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '..';
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "..";
 
 interface PrivilegeModel extends Model {
   id: number;
@@ -7,7 +7,7 @@ interface PrivilegeModel extends Model {
 }
 
 export const Privilege = sequelize.define<PrivilegeModel>(
-  'Privilege',
+  "Privilege",
   {
     id: {
       type: DataTypes.INTEGER,

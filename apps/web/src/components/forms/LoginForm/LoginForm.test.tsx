@@ -86,7 +86,7 @@ describe("LoginForm", () => {
     screen.getByRole("checkbox", { checked: true });
 
     await userEvent.type(passwordInput, passwordText);
-    await userEvent.type(emailInput, 'wrongmail@test.com');
+    await userEvent.type(emailInput, "wrongmail@test.com");
     userEvent.click(submitButton);
 
     screen.debug();
@@ -129,4 +129,3 @@ describe("LoginForm", () => {
     await waitFor(() => expect(setToken).toHaveBeenCalled());
   });
 });
-

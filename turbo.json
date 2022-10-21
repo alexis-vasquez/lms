@@ -18,6 +18,7 @@
     }
   },
   "globalEnv": [
+    "NEXT_PUBLIC_API_URL",
     "NODE_ENV",
     "PORT",
     "JWT_SECRET",

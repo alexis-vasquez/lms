@@ -3,7 +3,7 @@ import { AuthContextProvider } from "@/context/AuthContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppProps } from "next/app";
 
-import "antd/dist/antd.css";
+import "@romalms/design-system/styles/main.css";
 
 const appClient = new QueryClient();
 
@@ -20,4 +20,3 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </QueryClientProvider>
   );
 }
-

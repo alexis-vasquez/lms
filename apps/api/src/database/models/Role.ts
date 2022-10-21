@@ -1,6 +1,6 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '..';
-import { Privilege } from './Privilege';
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "..";
+import { Privilege } from "./Privilege";
 
 interface RoleModel extends Model {
   id: number;
@@ -8,7 +8,7 @@ interface RoleModel extends Model {
 }
 
 export const Role = sequelize.define<RoleModel>(
-  'Role',
+  "Role",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -28,11 +28,11 @@ export const Role = sequelize.define<RoleModel>(
 );
 
 Role.belongsToMany(Privilege, {
-  through: 'RolePrivileges',
+  through: "RolePrivileges",
   timestamps: false,
 });
 
 Privilege.belongsToMany(Role, {
-  through: 'RolePrivileges',
+  through: "RolePrivileges",
   timestamps: false,
 });

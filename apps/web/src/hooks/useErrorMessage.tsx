@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError } from "axios";
 
 export const useErrorMessage = (error: AxiosError<{ error: string }>) => {
   if (!error) return undefined;
@@ -7,5 +7,5 @@ export const useErrorMessage = (error: AxiosError<{ error: string }>) => {
     return error.response.data.error;
   }
 
-  return 'Something went wrong';
+  return "Something went wrong";
 };

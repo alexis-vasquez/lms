@@ -1,1 +1,1 @@
-export { Checkbox } from 'antd';
+export { Checkbox } from "antd";

@@ -1,5 +1,11 @@
-import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { FallbackSpinner } from '@/components/FallbackSpinner';
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { FallbackSpinner } from "@/components/FallbackSpinner";
 
 export const AppContext = createContext({
   isAppInitialized: false,

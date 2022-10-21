@@ -1,1 +1,1 @@
-export { UserOutlined } from '@ant-design/icons';
+export { UserOutlined } from "@ant-design/icons";

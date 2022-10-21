@@ -1,9 +1,9 @@
-import { matchRequestUrl, RequestHandler, MockedRequest } from 'msw';
-import { setupServer as setupMsw, SetupServerApi } from 'msw/node';
-import { cleanup, waitFor } from '@testing-library/react';
+import { matchRequestUrl, RequestHandler, MockedRequest } from "msw";
+import { setupServer as setupMsw, SetupServerApi } from "msw/node";
+import { cleanup, waitFor } from "@testing-library/react";
 
 export type SetupServerOptions = {
-  onPendingRequests?: 'error' | 'warn';
+  onPendingRequests?: "error" | "warn";
 };
 
 /**
@@ -33,17 +33,17 @@ export type SetupServerOptions = {
  * @returns
  */
 export function setupServer(
-  { onPendingRequests = 'warn' }: SetupServerOptions = {},
+  { onPendingRequests = "warn" }: SetupServerOptions = {},
   ...requestHandlers: RequestHandler[]
 ) {
   const server = setupMsw(...requestHandlers);
   const requests = new Map<string, MockedRequest>();
 
-  server.events.on('request:start', (req) => {
+  server.events.on("request:start", (req) => {
     requests.set(req.id, req);
   });
 
-  server.events.on('request:end', (req) => {
+  server.events.on("request:end", (req) => {
     requests.delete(req.id);
   });
 
@@ -70,12 +70,12 @@ export function setupServer(
       const pendingRequestsMessage = `Not all network requests were responded before the test ended. This usually means there is an issue in the test, which usually leads to flaky behavior.
       Pending requests:
       ${Array.from(requests.values())
-    .map((req) => `${req.method} ${req.url.href}`)
-    .join('\n')}`;
+        .map((req) => `${req.method} ${req.url.href}`)
+        .join("\n")}`;
       switch (onPendingRequests) {
-        case 'error':
+        case "error":
           throw new Error(pendingRequestsMessage);
-        case 'warn':
+        case "warn":
           console.error(pendingRequestsMessage);
       }
     }
@@ -123,7 +123,7 @@ export function setupServer(
  */
 export function waitForRequest(
   server: SetupServerApi,
-  method: 'get' | 'post' | 'put' | 'delete' | 'patch',
+  method: "get" | "post" | "put" | "delete" | "patch",
   url: string | RegExp
 ): Promise<MockedRequest> {
   let matchedReq: MockedRequest | undefined;
@@ -132,7 +132,7 @@ export function waitForRequest(
   return waitFor(
     () =>
       new Promise((resolve, _reject) => {
-        server.events.on('request:match', (req) => {
+        server.events.on("request:match", (req) => {
           if (matched) {
             return;
           }
@@ -146,7 +146,7 @@ export function waitForRequest(
           }
         });
 
-        server.events.on('response:mocked', (_res, reqId) => {
+        server.events.on("response:mocked", (_res, reqId) => {
           if (matchedReq === undefined) {
             return;
           }
@@ -160,9 +160,9 @@ export function waitForRequest(
   );
 }
 
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: jest.fn().mockImplementation(query => ({
+  value: jest.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,

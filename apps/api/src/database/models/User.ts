@@ -1,6 +1,6 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '..';
-import { Role } from './Role';
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "..";
+import { Role } from "./Role";
 
 export interface UserModel extends Model {
   id: number;
@@ -11,7 +11,7 @@ export interface UserModel extends Model {
   role: number;
 }
 
-export const User = sequelize.define<UserModel>('User', {
+export const User = sequelize.define<UserModel>("User", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -43,7 +43,7 @@ export const User = sequelize.define<UserModel>('User', {
 });
 
 User.belongsTo(Role, {
-  foreignKey: 'role',
-  targetKey: 'id',
-  onDelete: 'CASCADE',
+  foreignKey: "role",
+  targetKey: "id",
+  onDelete: "CASCADE",
 });

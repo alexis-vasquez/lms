@@ -1,1 +1,1 @@
-export { Form } from 'antd';
+export { Form } from "antd";
