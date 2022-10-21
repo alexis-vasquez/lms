@@ -1,7 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable default-case */
-import { beforeAll, beforeEach, afterEach, afterAll, vi } from 'vitest';
 import { matchRequestUrl, RequestHandler, MockedRequest } from 'msw';
 import { setupServer as setupMsw, SetupServerApi } from 'msw/node';
 import { cleanup, waitFor } from '@testing-library/react';
@@ -135,9 +131,7 @@ export function waitForRequest(
 
   return waitFor(
     () =>
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       new Promise((resolve, _reject) => {
-        // TODO REDASH-2696 Need to upgrade MSW to be able to remove listeners
         server.events.on('request:match', (req) => {
           if (matched) {
             return;
@@ -168,14 +162,14 @@ export function waitForRequest(
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation(query => ({
+  value: jest.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
   })),
 });

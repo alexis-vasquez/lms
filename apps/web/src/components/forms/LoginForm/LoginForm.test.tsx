@@ -1,131 +1,132 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, render, screen, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
-import { LoginForm } from '.';
-import { setupServer, waitForRequest } from '@/utils/test/setup';
-import { AppContext } from '@/context/AppContext';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { act, render, screen, waitFor } from "@testing-library/react";
+import { rest } from "msw";
+import { LoginForm } from ".";
+import { setupServer, waitForRequest } from "@/utils/test/setup";
+import { AuthContext } from "@/context/AuthContext";
+import userEvent from "@testing-library/user-event";
 
-describe('LoginForm', () => {
-  const emailText = 'test@test.com';
-  const passwordText = 'password';
-  const errorMessage = 'Invalid credentials';
-  
-  const server = setupServer({ onPendingRequests: 'error' });
-  
+describe("LoginForm", () => {
+  const emailText = "test@test.com";
+  const passwordText = "password";
+  const errorMessage = "Invalid credentials";
+
   const setToken = jest.fn();
+
+  const server = setupServer();
 
   function renderTestComponent() {
     const queryClient = new QueryClient();
     render(
       <QueryClientProvider client={queryClient}>
-        <AppContext.Provider
+        <AuthContext.Provider
           value={{
             user: null,
             setToken,
           }}
         >
           <LoginForm />
-        </AppContext.Provider>
+        </AuthContext.Provider>
       </QueryClientProvider>
     );
   }
 
-  it('Should render all fields', async () => {
+  it("Should render all fields", async () => {
     renderTestComponent();
 
-    screen.getByRole('textbox', { name: /Email/ });
-    screen.getByRole('textbox', { name: /Password/ });
+    screen.getByRole("textbox", { name: /Email/ });
+    screen.getByRole("textbox", { name: /Password/ });
 
-    screen.getByRole('checkbox');
-    screen.getByRole('button', { name: /Log in/ });
+    screen.getByRole("checkbox");
+    screen.getByRole("button", { name: /Log in/ });
   });
 
-  it('Should show error message when email is invalid', async () => {
+  it("Should show error message when email is invalid", async () => {
     renderTestComponent();
 
-    const passwordInput = screen.getByRole('textbox', { name: /Password/ });
-    const submitButton = screen.getByRole('button', { name: /Log in/ });
+    const passwordInput = screen.getByRole("textbox", { name: /Password/ });
+    const submitButton = screen.getByRole("button", { name: /Log in/ });
 
-    act(() => {
-      userEvent.type(passwordInput, passwordText);
-      submitButton.click();
-    });
+    userEvent.type(passwordInput, passwordText);
+    submitButton.click();
 
-    await screen.findByText('Please input your Email!');
-    screen.queryByText('Please input your Password!');
+    await screen.findByText("Please input your Email!");
+    screen.queryByText("Please input your Password!");
   });
 
-  it('Should show error message when password is invalid', async () => {
+  it("Should show error message when password is invalid", async () => {
     renderTestComponent();
 
-    const emailInput = screen.getByRole('textbox', { name: /Email/ });
-    const submitButton = screen.getByRole('button', { name: /Log in/ });
+    const emailInput = screen.getByRole("textbox", { name: /Email/ });
+    const submitButton = screen.getByRole("button", { name: /Log in/ });
 
-    act(() => {
-      userEvent.type(emailInput, emailText);
-      submitButton.click();
-    });
+    userEvent.type(emailInput, emailText);
+    submitButton.click();
 
-    screen.queryByText('Please input your Email!');
-    await screen.findByText('Please input your Password!');
+    screen.queryByText("Please input your Email!");
+    await screen.findByText("Please input your Password!");
   });
 
-  it('Should show error message from API', async () => {
+  it("Should show error message from API", async () => {
     server.use(
       rest.post<{ email: string; password: string }>(
-        '/api/auth/login',
+        "http://localhost:3000/api/auth/login",
         (req, res, ctx) => {
           return res(ctx.status(401), ctx.json({ error: errorMessage }));
         }
       )
     );
-  
+
     renderTestComponent();
 
-    const emailInput = screen.getByRole('textbox', { name: /Email/ });
-    const passwordInput = screen.getByRole('textbox', { name: /Password/ });
-    const submitButton = screen.getByRole('button', { name: /Log in/ });
+    const emailInput = screen.getByRole("textbox", { name: /Email/ });
+    const passwordInput = screen.getByRole("textbox", { name: /Password/ });
+    const submitButton = screen.getByRole("button", { name: /Log in/ });
 
-    screen.getByRole('checkbox', { checked: true });
+    screen.getByRole("checkbox", { checked: true });
 
-    act(() => {
-      userEvent.type(emailInput, 'wrongMail@test.com');
-      userEvent.type(passwordInput, passwordText);
-      submitButton.click();
-    });
+    await userEvent.type(passwordInput, passwordText);
+    await userEvent.type(emailInput, 'wrongmail@test.com');
+    userEvent.click(submitButton);
 
-    await waitForRequest(server, 'post', 'api/auth/login');
+    screen.debug();
+    await waitForRequest(
+      server,
+      "post",
+      "http://localhost:3000/api/auth/login"
+    );
     await screen.findByText(errorMessage);
   });
 
-  it('Should submit form correctly', async () => {
+  it("Should submit form correctly", async () => {
     server.use(
       rest.post<{ email: string; password: string }>(
-        '/api/auth/login',
+        "http://localhost:3000/api/auth/login",
         (req, res, ctx) => {
-          return res(ctx.status(200), ctx.json({ token: 'token' }));
+          return res(ctx.status(200), ctx.json({ token: "token" }));
         }
       )
     );
 
     renderTestComponent();
 
-    const emailInput = screen.getByRole('textbox', { name: /Email/ });
-    const passwordInput = screen.getByRole('textbox', { name: /Password/ });
-    const submitButton = screen.getByRole('button', { name: /Log in/ });
+    const emailInput = screen.getByRole("textbox", { name: /Email/ });
+    const passwordInput = screen.getByRole("textbox", { name: /Password/ });
+    const submitButton = screen.getByRole("button", { name: /Log in/ });
 
-    screen.getByRole('checkbox', { checked: true });
+    screen.getByRole("checkbox", { checked: true });
 
-    act(() => {
-      userEvent.type(emailInput, emailText);
-      userEvent.type(passwordInput, passwordText);
-      submitButton.click();
-    });
+    await userEvent.type(emailInput, emailText);
+    await userEvent.type(passwordInput, passwordText);
+    userEvent.click(submitButton);
 
-    await waitForRequest(server, 'post', '/api/auth/login');
-
-
+    await waitForRequest(
+      server,
+      "post",
+      "http://localhost:3000/api/auth/login"
+    );
     expect(screen.queryByText(errorMessage)).toBeNull();
-    await waitFor(() => expect(setToken).toHaveBeenCalledOnce());
+    await waitFor(() => expect(setToken).toHaveBeenCalled());
   });
 });
+

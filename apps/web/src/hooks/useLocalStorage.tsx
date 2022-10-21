@@ -19,6 +19,7 @@ export const useLocalStorage = <T,>(key: string, initialValue: T) => {
     try {
       if (value === null) {
         window.localStorage.removeItem(key);
+        setStoredValue(null as T);
         return;
       }
       const valueToStore =

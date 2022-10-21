@@ -2,8 +2,7 @@
   "extends": "@romalms/tsconfig/nextjs.json",
   "compilerOptions": {
     "types": [
-      "@emotion/react/types/css-prop",
-      "jest",
+      "@emotion/react/types/css-prop"
     ],
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
@@ -19,6 +18,8 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx"
   ]
 }

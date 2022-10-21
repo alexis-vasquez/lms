@@ -36,13 +36,12 @@ export const LoginForm = () => {
   const [form] = Form.useForm();
 
   const handleSubmit = (values: LoginFormValues) => {
-    const { remember, ...otherValues } = values;
-    mutate(otherValues, {
+    const { remember, ...emailAndPassword } = values;
+    mutate(emailAndPassword, {
       onSuccess: ({ token }) => {
         setToken(token, remember);
       },
       onError: () => {
-        // eslint-disable-next-line no-alert
         form.setFieldValue('password', '');
       },
     });

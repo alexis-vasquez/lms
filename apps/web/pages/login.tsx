@@ -1,7 +1,6 @@
 /* eslint-disable import/no-default-export */
 import React from 'react'
 import { css } from '@emotion/react';
-import backgroundImage from '@/assets/login-background.jpg';
 import { LoginForm } from '@/components/forms/LoginForm';
 import { DefaultAvatar } from '@romalms/design-system';
 import { NextPage } from 'next';
@@ -9,7 +8,6 @@ import { protectedPage } from '../router';
 
 const styles = {
   container: css({
-    backgroundImage: `url(${backgroundImage})`,
     backgroundPosition: 'center',
     height: '100vh',
     padding: 20,

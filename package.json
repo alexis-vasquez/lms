@@ -8,8 +8,8 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "dotenv -c -- turbo run dev --parallel",
-    "dev:be": "dotenv -c -- turbo run dev --filter=api...",
+    "dev": "turbo run dev --parallel",
+    "dev:be": "turbo run dev --filter=api...",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -20,9 +20,6 @@
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "dependencies": {
-    "dotenv-cli": "^6.0.0"
   },
   "packageManager": "yarn@1.22.18"
 }
