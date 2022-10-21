@@ -1,12 +1,11 @@
-import { NextPage } from "next";
-import { privatePage } from "../router";
+import { LayoutType } from "@/components/Layout";
+import { privatePage } from "@/router";
+import { NextPageWithLayout } from "./_app";
 
-const Dashboard: NextPage = () => {
-  return (
-    <div>
-      <h1>DASHBOARD</h1>
-    </div>
-  );
+const Dashboard: NextPageWithLayout = () => {
+  return <h1>Dashboard</h1>;
 };
+
+Dashboard.layout = LayoutType.DASHBOARD;
 
 export default privatePage(Dashboard);

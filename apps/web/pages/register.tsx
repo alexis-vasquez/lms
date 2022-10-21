@@ -1,9 +1,9 @@
 import { RegisterForm } from "@/components/forms/RegisterForm";
 import { css } from "@emotion/react";
-import { Avatar } from "@romalms/design-system";
+import { AppstoreOutlined, Avatar } from "@romalms/design-system";
 import { NextPage } from "next";
 import Link from "next/link";
-import { protectedPage } from "../router";
+import { protectedPage } from "@/router";
 
 const styles = {
   container: css({
@@ -30,7 +30,7 @@ const RegisterPage: NextPage = () => {
   return (
     <div css={styles.container}>
       <div css={styles.content}>
-        <Avatar />
+        <Avatar size={100} icon={<AppstoreOutlined />} />
         <RegisterForm />
         <span>
           Already signed in? <Link href="/login">Login</Link>

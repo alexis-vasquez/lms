@@ -2,9 +2,9 @@
 import React from "react";
 import { css } from "@emotion/react";
 import { LoginForm } from "@/components/forms/LoginForm";
-import { Avatar } from "@romalms/design-system";
+import { AppstoreOutlined, Avatar } from "@romalms/design-system";
 import { NextPage } from "next";
-import { protectedPage } from "../router";
+import { protectedPage } from "@/router";
 import Link from "next/link";
 
 const styles = {
@@ -32,7 +32,7 @@ const LoginPage: NextPage = () => {
   return (
     <div css={styles.container}>
       <div css={styles.content}>
-        <Avatar />
+        <Avatar size={100} icon={<AppstoreOutlined />} />
         <LoginForm />
         <span>
           Don't have an account? <Link href="/register">Register</Link>

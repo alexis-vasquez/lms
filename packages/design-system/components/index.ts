@@ -1,8 +1,12 @@
 export { Alert } from "./Alert";
 export { Avatar } from "./Avatar";
+export { Breadcrumb } from "./Breadcrumb";
 export { Button } from "./Button";
 export { Checkbox } from "./Checkbox";
 export { Form } from "./Form";
+export { Image } from "./Image";
 export { Input } from "./Input";
+export { Layout } from "./Layout";
+export * from "./Menu";
 export { Spin } from "./Spin";
 export * from "./Icons";
