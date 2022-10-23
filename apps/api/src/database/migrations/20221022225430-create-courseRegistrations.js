@@ -25,10 +25,10 @@ module.exports = {
       courseId: {
         type: Sequelize.INTEGER,
         unique: true,
-        onDelete: "CASCADE",
         references: {
           model: "Courses",
           key: "id",
+          onDelete: "CASCADE",
         },
       },
       createdAt: {

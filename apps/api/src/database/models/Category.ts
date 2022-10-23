@@ -30,7 +30,11 @@ export const Category = sequelize.define<CategoryModel>(
   }
 );
 
+Course.belongsTo(Category, {
+  foreignKey: "categoryId",
+});
+
 Category.hasMany(Course, {
-  onDelete: "CASCADE",
+  onDelete: "SET NULL",
   foreignKey: "categoryId",
 });

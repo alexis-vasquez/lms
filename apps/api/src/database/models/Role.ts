@@ -28,6 +28,10 @@ export const Role = sequelize.define<RoleModel>(
   }
 );
 
+User.belongsTo(Role, {
+  foreignKey: "roleId",
+});
+
 Role.hasMany(User, {
   foreignKey: "roleId",
   onDelete: "SET DEFAULT",

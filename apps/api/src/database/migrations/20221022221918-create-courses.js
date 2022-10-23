@@ -50,6 +50,7 @@ module.exports = {
         references: {
           model: "CourseStatuses",
           key: "id",
+          onDelete: "RESTRICT",
         },
       },
       enable: {

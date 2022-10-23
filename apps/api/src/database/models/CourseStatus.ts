@@ -1,7 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
 import { Course } from "./Course";
-import { CourseRegistration } from "./CourseRegistration";
 
 enum CourseStatusName {
   PENDING = "pending",
@@ -26,19 +25,17 @@ export const CourseStatus = sequelize.define<CourseStatusModel>(
     },
     name: {
       type: DataTypes.ENUM("pending", "active", "finished", "cancelled"),
-      defaultValue: "active",
       allowNull: false,
     },
   },
   { timestamps: false }
 );
 
-CourseStatus.hasMany(Course, {
-  onDelete: "CASCADE",
-  foreignKey: "courseStatusId",
+Course.belongsTo(CourseStatus, {
+  foreignKey: "statusId",
 });
 
-Course.hasMany(CourseRegistration, {
-  onDelete: "CASCADE",
-  foreignKey: "courseId",
+CourseStatus.hasMany(Course, {
+  onDelete: "RESTRICT",
+  foreignKey: "courseStatusId",
 });

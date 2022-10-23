@@ -36,8 +36,8 @@ module.exports = {
       roleId: {
         type: Sequelize.INTEGER,
         defaultValue: 2,
-        onDelete: 'SET DEFAULT',
         references: {
+          onDelete: 'SET DEFAULT',
           model: 'Roles',
           key: 'id',
         },

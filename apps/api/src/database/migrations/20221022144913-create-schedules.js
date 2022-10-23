@@ -69,10 +69,10 @@ module.exports = {
       scheduleWeekDaysId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onDelete: "CASCADE",
         references: {
           model: "ScheduleWeekDays",
           key: "id",
+          onDelete: "RESTRICT",
         },
       },
       createdAt: {

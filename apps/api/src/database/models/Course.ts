@@ -30,7 +30,6 @@ export const Course = sequelize.define<CourseModel>("Course", {
   },
   categoryId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
   },
   level: {
     type: DataTypes.STRING,
@@ -51,4 +50,13 @@ export const Course = sequelize.define<CourseModel>("Course", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+});
+
+CourseRegistration.belongsTo(Course, {
+  foreignKey: "courseId",
+});
+
+Course.hasMany(CourseRegistration, {
+  onDelete: "CASCADE",
+  foreignKey: "courseId",
 });

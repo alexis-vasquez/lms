@@ -57,7 +57,11 @@ export const ScheduleWeekDay = sequelize.define<ScheduleWeekDayModel>(
   }
 );
 
+Schedule.belongsTo(ScheduleWeekDay, {
+  foreignKey: "scheduleWeekDayId",
+});
+
 ScheduleWeekDay.hasMany(Schedule, {
-  onDelete: "CASCADE",
+  onDelete: "RESTRICT",
   foreignKey: "scheduleWeekDaysId",
 });

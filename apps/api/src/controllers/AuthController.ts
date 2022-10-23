@@ -19,11 +19,14 @@ export class AuthController {
     const user = await User.findOne({
       where: { email },
       include: [{ model: Role, attributes: [] }],
-      attributes: {
-        exclude: ["createdAt", "updatedAt", "role"],
-        // Rename the column name from 'role.name' to 'role'
-        include: [[Sequelize.col('"Role"."name"'), "role"]],
-      },
+      attributes: [
+        "id",
+        "email",
+        "firstName",
+        "password",
+        "lastName",
+        [Sequelize.col('"Role"."name"'), "role"],
+      ],
       raw: true,
     });
     if (!user) return res.status(401).json({ error: "User not found" });

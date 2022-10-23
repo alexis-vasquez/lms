@@ -43,6 +43,10 @@ export const User = sequelize.define<UserModel>("User", {
   },
 });
 
+CourseRegistration.belongsTo(User, {
+  foreignKey: "userId",
+});
+
 User.hasMany(CourseRegistration, {
   foreignKey: "userId",
   onDelete: "CASCADE",
