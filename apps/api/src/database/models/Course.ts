@@ -1,0 +1,54 @@
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "..";
+import { CourseRegistration } from "./CourseRegistration";
+
+interface CourseModel extends Model {
+  id: number;
+  name: string;
+  description: string;
+  categoryId: number;
+  level: string;
+  rate: number;
+  statusId: number;
+  enable: boolean;
+  scheduleId: number;
+}
+
+export const Course = sequelize.define<CourseModel>("Course", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    unique: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.STRING,
+  },
+  categoryId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  level: {
+    type: DataTypes.STRING,
+  },
+  rate: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  courseStatusId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  enable: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
+  scheduleId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+});

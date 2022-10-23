@@ -1,3 +1,9 @@
 export { Role } from "./Role";
 export { User } from "./User";
 export { Privilege } from "./Privilege";
+export { Category } from "./Category";
+export { CourseStatus } from "./CourseStatus";
+export { Course } from "./Course";
+export { CourseRegistration } from "./CourseRegistration";
+export { Schedule } from "./Schedule";
+export { ScheduleWeekDay } from "./ScheduleWeekDay";

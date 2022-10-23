@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
 import { Privilege } from "./Privilege";
+import { User } from "./User";
 
 interface RoleModel extends Model {
   id: number;
@@ -26,6 +27,11 @@ export const Role = sequelize.define<RoleModel>(
     timestamps: false,
   }
 );
+
+Role.hasMany(User, {
+  foreignKey: "roleId",
+  onDelete: "SET DEFAULT",
+});
 
 Role.belongsToMany(Privilege, {
   through: "RolePrivileges",
