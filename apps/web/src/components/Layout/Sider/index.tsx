@@ -42,6 +42,12 @@ export const Sider = () => {
             key: 3,
             icon: <ReadOutlined />,
           },
+          {
+            label: "Profile",
+            key: "/profile",
+            onClick: () =>
+              router.push("/profile", undefined, { shallow: true }),
+          },
         ]}
       />
     </Layout.Sider>

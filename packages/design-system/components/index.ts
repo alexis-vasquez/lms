@@ -3,6 +3,7 @@ export { Avatar } from "./Avatar";
 export { Breadcrumb } from "./Breadcrumb";
 export { Button } from "./Button";
 export { Checkbox } from "./Checkbox";
+export { Dropdown } from "./Dropdown";
 export { Form } from "./Form";
 export { Image } from "./Image";
 export { Input } from "./Input";

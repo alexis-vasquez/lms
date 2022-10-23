@@ -18,7 +18,7 @@ export const Content = ({ children }: PropsWithChildren) => {
 const styles = {
   wrapper: css({
     minHeight: "100%",
-    padding: "0 20px",
+    padding: "0 20px 20px",
   }),
   content: css({
     background: "#fff",

@@ -1,3 +1,4 @@
+import { useAuthContext } from "@/context/AuthContext";
 import { css } from "@emotion/react";
 import { Layout } from "@romalms/design-system";
 import { PropsWithChildren } from "react";
@@ -31,7 +32,9 @@ export const LayoutWrapper = ({
   children,
   layout,
 }: PropsWithChildren<{ layout?: LayoutType }>) => {
-  if (layout === LayoutType.DASHBOARD) {
+  const { user } = useAuthContext();
+  // We check user here to prevent flash of dashboard content
+  if (layout === LayoutType.DASHBOARD && user) {
     return <LayoutContainer>{children}</LayoutContainer>;
   }
   return <>{children}</>;
