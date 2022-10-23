@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
 import { Category } from "./Category";
+import { CourseRegistration } from "./CourseRegistration";
 
 interface CourseModel extends Model {
   id: number;
@@ -11,6 +12,7 @@ interface CourseModel extends Model {
   rate: number;
   status: string;
   enable: boolean;
+  scheduleId: number;
 }
 
 export const Course = sequelize.define<CourseModel>(
@@ -50,8 +52,18 @@ export const Course = sequelize.define<CourseModel>(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
+    scheduleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
   }
 );
+
+Course.hasMany(CourseRegistration, {
+  onDelete: "CASCADE",
+  foreignKey: "courseId",
+  as: "CourseRegistration",
+});

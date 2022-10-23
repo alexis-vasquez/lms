@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("CourseStatus", {
+    await queryInterface.createTable("CourseStatuses", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -47,7 +47,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "CourseStatus",
+          model: "CourseStatuses",
           key: "id",
         },
       },
@@ -55,11 +55,19 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
+      scheduleId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Schedules",
+          key: "id",
+        },
+      },
     });
   },
 
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("Courses");
-    await queryInterface.dropTable("CourseStatus");
+    await queryInterface.dropTable("CourseStatuses");
   },
 };

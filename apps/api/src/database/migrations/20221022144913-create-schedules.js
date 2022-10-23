@@ -46,7 +46,7 @@ module.exports = {
         unique: true,
       },
 
-      initDate: {
+      startDate: {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
@@ -65,7 +65,7 @@ module.exports = {
         type: Sequelize.TIME,
         allowNull: false,
       },
-      weekDays: {
+      scheduleWeekDaysId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         onDelete: "CASCADE",
@@ -73,6 +73,14 @@ module.exports = {
           model: "ScheduleWeekDays",
           key: "id",
         },
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },

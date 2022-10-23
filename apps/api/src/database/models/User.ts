@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
+import { CourseRegistration } from "./CourseRegistration";
 import { Role } from "./Role";
 
 export interface UserModel extends Model {
@@ -45,5 +46,10 @@ export const User = sequelize.define<UserModel>("User", {
 User.belongsTo(Role, {
   foreignKey: "role",
   targetKey: "id",
+  onDelete: "CASCADE",
+});
+
+User.hasMany(CourseRegistration, {
+  foreignKey: "userId",
   onDelete: "CASCADE",
 });
