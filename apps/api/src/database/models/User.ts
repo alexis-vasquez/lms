@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
-import { Role } from "./Role";
+import { CourseRegistration } from "./CourseRegistration";
 
 export interface UserModel extends Model {
   id: number;
@@ -8,7 +8,7 @@ export interface UserModel extends Model {
   password: string;
   firstName: string;
   lastName: string;
-  role: number;
+  roleId: number;
 }
 
 export const User = sequelize.define<UserModel>("User", {
@@ -21,6 +21,7 @@ export const User = sequelize.define<UserModel>("User", {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    primaryKey: true,
     unique: true,
   },
   password: {
@@ -35,15 +36,14 @@ export const User = sequelize.define<UserModel>("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  role: {
+  roleId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 2,
   },
 });
 
-User.belongsTo(Role, {
-  foreignKey: "role",
-  targetKey: "id",
+User.hasMany(CourseRegistration, {
+  foreignKey: "userId",
   onDelete: "CASCADE",
 });
