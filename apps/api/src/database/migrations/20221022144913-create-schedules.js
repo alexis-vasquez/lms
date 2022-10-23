@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("ScheduleWeekDays",{
+    await queryInterface.createTable("ScheduleWeekDays", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -29,14 +29,14 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
-      saturday:{
+      saturday: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       sunday: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
-      }
+      },
     });
     await queryInterface.createTable("Schedules", {
       id: {
@@ -55,7 +55,7 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
-      
+
       startTime: {
         type: Sequelize.TIME,
         allowNull: false,
@@ -68,10 +68,10 @@ module.exports = {
       weekDays: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
         references: {
-          model: 'ScheduleWeekDays',
-          key: 'id',
+          model: "ScheduleWeekDays",
+          key: "id",
         },
       },
     });

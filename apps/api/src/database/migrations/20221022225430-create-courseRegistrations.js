@@ -13,23 +13,23 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Users',
-          key: 'id',
-        }
+          model: "Users",
+          key: "id",
+        },
       },
       position: {
-        type: Sequelize.ENUM('student','instructor', 'tutor'),
-        defaultValue: 'student',
+        type: Sequelize.ENUM("student", "instructor", "tutor"),
+        defaultValue: "student",
         allowNull: false,
       },
       courseId: {
         type: Sequelize.INTEGER,
         unique: true,
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
         references: {
-          model: 'Courses',
-          key: 'id',
-        }
+          model: "Courses",
+          key: "id",
+        },
       },
     });
   },

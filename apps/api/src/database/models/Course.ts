@@ -1,7 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
-import {Category} from "./Category";
-
+import { Category } from "./Category";
 
 interface CourseModel extends Model {
   id: number;

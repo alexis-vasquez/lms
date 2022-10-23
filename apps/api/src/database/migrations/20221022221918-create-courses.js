@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('CourseStatus', { 
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("CourseStatus", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -10,17 +10,17 @@ module.exports = {
         unique: true,
       },
       name: {
-        type: Sequelize.ENUM('pending','active','finished','cancelled'),
-        defaultValue: 'active',
+        type: Sequelize.ENUM("pending", "active", "finished", "cancelled"),
+        defaultValue: "active",
         allowNull: false,
-      }
+      },
     });
-    await queryInterface.createTable('Courses', { 
+    await queryInterface.createTable("Courses", {
       id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      unique: true,
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        unique: true,
       },
       name: {
         type: Sequelize.STRING,
@@ -32,7 +32,7 @@ module.exports = {
       category: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Categories',
+          model: "Categories",
           key: "id",
         },
       },
@@ -47,10 +47,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'CourseStatus',
-          key: 'id',
+          model: "CourseStatus",
+          key: "id",
         },
-
       },
       enable: {
         type: Sequelize.BOOLEAN,
@@ -59,8 +58,8 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
-  await queryInterface.dropTable('Courses');
-  await queryInterface.dropTable('CourseStatus');
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("Courses");
+    await queryInterface.dropTable("CourseStatus");
+  },
 };
