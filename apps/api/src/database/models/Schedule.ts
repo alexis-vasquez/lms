@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
-import { ScheduleWeekDay } from "./ScheduleWeekDay";
+import { Course } from "./Course";
 
 interface ScheduleModel extends Model {
   id: number;
@@ -38,8 +38,8 @@ export const Schedule = sequelize.define<ScheduleModel>("Schedule", {
     allowNull: false,
   },
 });
-Schedule.belongsTo(ScheduleWeekDay, {
+
+Schedule.hasMany(Course, {
   onDelete: "CASCADE",
-  foreignKey: "scheduleWeekDaysId",
-  targetKey: "id",
+  foreignKey: "scheduleId",
 });

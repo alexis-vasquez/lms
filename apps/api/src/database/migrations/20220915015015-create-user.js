@@ -33,7 +33,7 @@ module.exports = {
         allowNull: false,
         defaultValue: true,
       },
-      role: {
+      roleId: {
         type: Sequelize.INTEGER,
         defaultValue: 2,
         onDelete: 'SET DEFAULT',

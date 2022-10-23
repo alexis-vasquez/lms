@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
+import { Schedule } from "./Schedule";
 
 interface ScheduleWeekDayModel extends Model {
   id: number;
@@ -17,6 +18,7 @@ export const ScheduleWeekDay = sequelize.define<ScheduleWeekDayModel>(
   {
     id: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       allowNull: false,
       autoIncrement: true,
       unique: true,
@@ -54,3 +56,8 @@ export const ScheduleWeekDay = sequelize.define<ScheduleWeekDayModel>(
     timestamps: false,
   }
 );
+
+ScheduleWeekDay.hasMany(Schedule, {
+  onDelete: "CASCADE",
+  foreignKey: "scheduleWeekDaysId",
+});

@@ -15,6 +15,7 @@ module.exports = {
         allowNull: false,
       },
     });
+
     await queryInterface.createTable("Courses", {
       id: {
         type: Sequelize.INTEGER,
@@ -29,7 +30,7 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      category: {
+      categoryId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Categories",
@@ -43,7 +44,7 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      status: {
+      courseStatusId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -62,6 +63,14 @@ module.exports = {
           model: "Schedules",
           key: "id",
         },
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },

@@ -38,6 +38,7 @@ module.exports = {
         defaultValue: false,
       },
     });
+
     await queryInterface.createTable("Schedules", {
       id: {
         type: Sequelize.INTEGER,

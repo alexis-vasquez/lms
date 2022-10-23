@@ -1,69 +1,54 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
-import { Category } from "./Category";
 import { CourseRegistration } from "./CourseRegistration";
 
 interface CourseModel extends Model {
   id: number;
   name: string;
   description: string;
-  category: string;
+  categoryId: number;
   level: string;
   rate: number;
-  status: string;
+  statusId: number;
   enable: boolean;
   scheduleId: number;
 }
 
-export const Course = sequelize.define<CourseModel>(
-  "Course",
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      unique: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    level: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    rate: {
-      type: DataTypes.NUMBER,
-      allowNull: false,
-    },
-    status: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    enable: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
-    scheduleId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+export const Course = sequelize.define<CourseModel>("Course", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    unique: true,
   },
-  {
-    timestamps: false,
-  }
-);
-
-Course.hasMany(CourseRegistration, {
-  onDelete: "CASCADE",
-  foreignKey: "courseId",
-  as: "CourseRegistration",
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.STRING,
+  },
+  categoryId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  level: {
+    type: DataTypes.STRING,
+  },
+  rate: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  courseStatusId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  enable: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
+  scheduleId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });

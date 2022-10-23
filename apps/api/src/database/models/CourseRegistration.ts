@@ -1,7 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
-import { Course } from "./Course";
-import { User } from "./User";
 
 enum PositionName {
   STUDENT = "student",
@@ -38,14 +36,5 @@ export const CourseRegistration = sequelize.define<CourseRegistrationModel>(
       type: DataTypes.INTEGER,
       unique: true,
     },
-  },
-  {
-    timestamps: false,
   }
 );
-
-CourseRegistration.belongsTo(Course, {
-  onDelete: "CASCADE",
-  foreignKey: "courseId",
-  targetKey: "id",
-});

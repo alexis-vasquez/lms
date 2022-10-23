@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
 import { Course } from "./Course";
+import { CourseRegistration } from "./CourseRegistration";
 
 enum CourseStatusName {
   PENDING = "pending",
@@ -31,3 +32,13 @@ export const CourseStatus = sequelize.define<CourseStatusModel>(
   },
   { timestamps: false }
 );
+
+CourseStatus.hasMany(Course, {
+  onDelete: "CASCADE",
+  foreignKey: "courseStatusId",
+});
+
+Course.hasMany(CourseRegistration, {
+  onDelete: "CASCADE",
+  foreignKey: "courseId",
+});

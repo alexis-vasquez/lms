@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
+import { Course } from "./Course";
 
 interface CategoryModel extends Model {
   id: number;
@@ -28,3 +29,8 @@ export const Category = sequelize.define<CategoryModel>(
     timestamps: false,
   }
 );
+
+Category.hasMany(Course, {
+  onDelete: "CASCADE",
+  foreignKey: "categoryId",
+});
