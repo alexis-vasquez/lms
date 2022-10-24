@@ -4,6 +4,7 @@ import { AppstoreOutlined, Avatar } from "@romalms/design-system";
 import { NextPage } from "next";
 import Link from "next/link";
 import { protectedPage } from "@/router";
+import { Routes } from "@/router";
 
 const styles = {
   container: css({
@@ -33,7 +34,7 @@ const RegisterPage: NextPage = () => {
         <Avatar size={100} icon={<AppstoreOutlined />} />
         <RegisterForm />
         <span>
-          Already signed in? <Link href="/login">Login</Link>
+          Already signed in? <Link href={Routes.Login.path}>Login</Link>
         </span>
       </div>
     </div>

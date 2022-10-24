@@ -1,15 +1,22 @@
-import {
-  AppstoreOutlined,
-  Layout,
-  Menu,
-  ReadOutlined,
-} from "@romalms/design-system";
+import { Routes } from "@/router";
+import { Layout, Menu } from "@romalms/design-system";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export const Sider = () => {
   const [collapsed, setCollapsed] = useState(false);
   const router = useRouter();
+
+  const sidebarRoutes = useMemo(() => {
+    return Object.values(Routes)
+      .filter((route) => route.sideBar)
+      .map(({ label, icon, path }) => ({
+        label,
+        icon,
+        onClick: () => router.push(path),
+        key: path,
+      }));
+  }, [router]);
 
   return (
     <Layout.Sider
@@ -23,32 +30,7 @@ export const Sider = () => {
         activeKey={router.pathname}
         theme="dark"
         mode="inline"
-        items={[
-          {
-            label: "Dashboard",
-            icon: <AppstoreOutlined />,
-            key: "/",
-            onClick: () => router.push("/", undefined, { shallow: true }),
-          },
-          {
-            label: "Courses",
-            icon: <ReadOutlined />,
-            onClick: () =>
-              router.push("/courses", undefined, { shallow: true }),
-            key: "/courses",
-          },
-          {
-            label: "State Check",
-            key: 3,
-            icon: <ReadOutlined />,
-          },
-          {
-            label: "Profile",
-            key: "/profile",
-            onClick: () =>
-              router.push("/profile", undefined, { shallow: true }),
-          },
-        ]}
+        items={sidebarRoutes}
       />
     </Layout.Sider>
   );

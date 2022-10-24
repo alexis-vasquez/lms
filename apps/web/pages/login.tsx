@@ -6,6 +6,7 @@ import { AppstoreOutlined, Avatar } from "@romalms/design-system";
 import { NextPage } from "next";
 import { protectedPage } from "@/router";
 import Link from "next/link";
+import { Routes } from "@/router";
 
 const styles = {
   container: css({
@@ -35,7 +36,8 @@ const LoginPage: NextPage = () => {
         <Avatar size={100} icon={<AppstoreOutlined />} />
         <LoginForm />
         <span>
-          Don't have an account? <Link href="/register">Register</Link>
+          Don't have an account?{" "}
+          <Link href={Routes.Register.path}>Register</Link>
         </span>
       </div>
     </div>

@@ -1,6 +1,13 @@
 import { useAuthContext } from "@/context/AuthContext";
+import { Routes } from "@/router";
 import { css } from "@emotion/react";
-import { Avatar, Dropdown, Image, Layout, Menu } from "@romalms/design-system";
+import {
+  Avatar,
+  Dropdown,
+  Layout,
+  LogoutOutlined,
+  Menu,
+} from "@romalms/design-system";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -12,16 +19,18 @@ export const Header = () => {
     <Menu
       items={[
         {
-          key: "profile",
-          label: "Profile",
-          onClick: () => router.push("/profile", undefined, { shallow: true }),
+          key: Routes.Profile.path,
+          label: Routes.Profile.label,
+          onClick: () => router.push(Routes.Profile.path),
+          icon: Routes.Profile.icon,
         },
         {
           key: "logout",
           label: "Logout",
+          icon: <LogoutOutlined />,
           onClick: () => {
             setToken(null);
-            router.push("/login");
+            router.push(Routes.Login.path);
           },
         },
       ]}
@@ -33,15 +42,14 @@ export const Header = () => {
       <Link href="/">LMS</Link>
       <Dropdown
         overlay={menu}
-        trigger={["hover"]}
+        trigger={["click"]}
         overlayStyle={{ minWidth: 300 }}
         arrow
         placement="bottomRight"
       >
         <Avatar
-          src={
-            <Image src="https://joeschmoe.io/api/v1/random" alt="User avatar" />
-          }
+          src="https://joeschmoe.io/api/v1/random"
+          css={{ cursor: "pointer" }}
         />
       </Dropdown>
     </Layout.Header>
