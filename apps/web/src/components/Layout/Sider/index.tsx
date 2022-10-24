@@ -1,4 +1,5 @@
 import { Routes } from "@/router";
+import { css } from "@emotion/react";
 import { Layout, Menu } from "@romalms/design-system";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
@@ -26,6 +27,7 @@ export const Sider = () => {
       defaultCollapsed
     >
       <Menu
+        css={styles.menu}
         selectedKeys={[router.pathname]}
         activeKey={router.pathname}
         theme="dark"
@@ -34,4 +36,12 @@ export const Sider = () => {
       />
     </Layout.Sider>
   );
+};
+
+const styles = {
+  menu: css({
+    "& > li": {
+      marginTop: "0px !important",
+    },
+  }),
 };

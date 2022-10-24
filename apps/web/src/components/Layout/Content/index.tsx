@@ -19,8 +19,5 @@ const styles = {
   }),
   content: css({
     background: "#fff",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   }),
 };

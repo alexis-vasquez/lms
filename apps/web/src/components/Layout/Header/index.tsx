@@ -61,5 +61,6 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    padding: "0 24px",
   }),
 };
