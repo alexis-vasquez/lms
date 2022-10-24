@@ -21,17 +21,17 @@ type Route = {
 };
 
 export const Routes: Record<RoutesKeys, Route> = {
+  Dashboard: {
+    label: "Home",
+    path: "/",
+    sideBar: true,
+    icon: <AppstoreOutlined />,
+  },
   Courses: {
     label: "Courses",
     path: "/courses",
     sideBar: true,
     icon: <ReadOutlined />,
-  },
-  Dashboard: {
-    label: "Dashboard",
-    path: "/",
-    sideBar: true,
-    icon: <AppstoreOutlined />,
   },
   Login: { label: "Login", path: "/login" },
   Profile: { label: "Profile", path: "/profile", icon: <UserOutlined /> },

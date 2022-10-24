@@ -1,15 +1,12 @@
 import { css } from "@emotion/react";
-import { Breadcrumb, Layout } from "@romalms/design-system";
+import { Layout } from "@romalms/design-system";
 import { PropsWithChildren } from "react";
+import { Breadcrumbs } from "./Breadcrumbs";
 
 export const Content = ({ children }: PropsWithChildren) => {
   return (
     <Layout css={styles.wrapper}>
-      <Breadcrumb style={{ margin: "16px 0" }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-      </Breadcrumb>
+      <Breadcrumbs />
       <Layout.Content css={styles.content}>{children}</Layout.Content>
     </Layout>
   );
