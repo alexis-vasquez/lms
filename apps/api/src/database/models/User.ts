@@ -9,6 +9,7 @@ export interface UserModel extends Model {
   firstName: string;
   lastName: string;
   roleId: number;
+  active: boolean;
 }
 
 export const User = sequelize.define<UserModel>("User", {
@@ -40,6 +41,11 @@ export const User = sequelize.define<UserModel>("User", {
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 2,
+  },
+  active: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
   },
 });
 

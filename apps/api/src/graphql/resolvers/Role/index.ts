@@ -1,0 +1,1 @@
+export { roleQueryResolver } from "./queries";
