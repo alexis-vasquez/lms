@@ -21,7 +21,7 @@ const contentStyle: React.CSSProperties = {
 
 const Courses: NextPageWithLayout = () => {
   return (
-    <Row>
+    <Row css={{ paddingBottom: 24 }}>
       <Col span={24}>
         <Carousel autoplay>
           {new Array(3).fill(null).map((_, index) => (

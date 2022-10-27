@@ -19,5 +19,7 @@ export { List } from "./List";
 export * from "./Menu";
 export { Row } from "./Row";
 export { Select } from "./Select";
+export { Space } from "./Space";
 export { Spin } from "./Spin";
 export { Tabs } from "./Tabs";
+export { Typography } from "./Typography";

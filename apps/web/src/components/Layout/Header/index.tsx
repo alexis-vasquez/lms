@@ -7,13 +7,14 @@ import {
   Layout,
   LogoutOutlined,
   Menu,
+  Typography,
 } from "@romalms/design-system";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 export const Header = () => {
   const router = useRouter();
-  const { setToken } = useAuthContext();
+  const { setToken, user } = useAuthContext();
 
   const menu = (
     <Menu
@@ -40,18 +41,34 @@ export const Header = () => {
   return (
     <Layout.Header css={styles.wrapper}>
       <Link href="/">LMS</Link>
-      <Dropdown
-        overlay={menu}
-        trigger={["click"]}
-        overlayStyle={{ minWidth: 300 }}
-        arrow
-        placement="bottomRight"
-      >
-        <Avatar
-          src="https://joeschmoe.io/api/v1/random"
-          css={{ cursor: "pointer" }}
-        />
-      </Dropdown>
+      <div css={{ display: "flex", gap: 8 }}>
+        <Dropdown
+          overlay={menu}
+          trigger={["click"]}
+          overlayStyle={{ minWidth: 200 }}
+          arrow
+          placement="bottom"
+        >
+          <Avatar
+            src="https://joeschmoe.io/api/v1/random"
+            css={{ cursor: "pointer" }}
+          />
+        </Dropdown>
+        <div
+          css={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Typography.Text css={{ color: "white", lineHeight: "16px" }} strong>
+            {user?.firstName} {user?.lastName}
+          </Typography.Text>
+          <Typography.Text css={{ color: "white", lineHeight: "16px" }}>
+            {user?.role}
+          </Typography.Text>
+        </div>
+      </div>
     </Layout.Header>
   );
 };
