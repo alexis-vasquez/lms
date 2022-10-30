@@ -1,5 +1,5 @@
-import { Role } from "../../../database/models";
-import { UserModel } from "../../../database/models/User";
+import { Role } from "@romalms/database/models";
+import { UserModel } from "@romalms/database/models/User";
 
 export const userBaseQueryResolver: any = {
   User: {

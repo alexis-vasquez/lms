@@ -1,8 +1,0 @@
-module.exports = {
-  // This code is not intended to be changed, therefore it will point to source
-  'migrations-path': './src/database/migrations',
-  'seeders-path': './src/database/seeders',
-  // Transpilled from typescript to javascript
-  'models-path': './dist/database/models',
-  'config': './dist/database/config.js'
-}

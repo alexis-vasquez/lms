@@ -1,0 +1,8 @@
+module.exports = {
+  // This code is not intended to be changed, therefore it will point to source
+  'migrations-path': './migrations',
+  'seeders-path': './seeders',
+  // Transpilled from typescript to javascript
+  'models-path': './dist/models',
+  'config': './dist/config.js'
+}

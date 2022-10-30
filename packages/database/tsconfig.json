@@ -1,0 +1,8 @@
+{
+  "extends": "@romalms/tsconfig/base.json",
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "outDir": "dist"
+  }
+}

@@ -1,10 +1,8 @@
 import { app } from "./app";
 import { graphQlServer } from "./graphqlServer";
 import { CONFIG } from "./config";
-import { sequelize } from "./database";
 import { expressMiddleware } from "@apollo/server/express4";
-
-import "./database/models";
+import { sequelize } from "@romalms/database";
 
 const main = async () => {
   try {
