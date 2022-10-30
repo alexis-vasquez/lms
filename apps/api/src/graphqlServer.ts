@@ -1,8 +1,11 @@
 import { ApolloServer } from "@apollo/server";
-import { resolvers } from "./graphql/resolvers";
-import { typeDefs } from "./graphql/typedefs";
+import { GraphQLSchema } from "graphql";
+import { query } from "./graphql/types";
+
+const schema = new GraphQLSchema({
+  query: query,
+});
 
 export const graphQlServer = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
 });

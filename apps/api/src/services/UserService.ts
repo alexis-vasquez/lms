@@ -1,24 +1,22 @@
 import { Sequelize } from "sequelize";
-import { Role, User } from "@romalms/database/models";
+import { Privilege, Role, User } from "@romalms/database/models";
 
 export class UserService {
   static getAllUsers() {
     return User.findAll({});
   }
-  static getUserWithRoleByEmail(email: string) {
+
+  static getUserByEmail(email: string) {
     return User.findOne({
-      where: { email },
-      include: [{ model: Role, attributes: [] }],
-      attributes: [
-        "id",
-        "email",
-        "firstName",
-        "password",
-        "lastName",
-        [Sequelize.col('"Role"."name"'), "role"],
-      ],
+      where: {
+        email,
+      },
       raw: true,
     });
+  }
+
+  static getUserById(id: number) {
+    return User.findByPk(id);
   }
 
   static createNewUser(user: {

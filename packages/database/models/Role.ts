@@ -3,7 +3,7 @@ import { sequelize } from "..";
 import { Privilege } from "./Privilege";
 import { User } from "./User";
 
-interface RoleModel extends Model {
+export interface RoleModel extends Model {
   id: number;
   name: string;
 }
@@ -38,11 +38,13 @@ Role.hasMany(User, {
 });
 
 Role.belongsToMany(Privilege, {
+  foreignKey: "roleId",
   through: "RolePrivileges",
   timestamps: false,
 });
 
 Privilege.belongsToMany(Role, {
+  foreignKey: "privilegeId",
   through: "RolePrivileges",
   timestamps: false,
 });

@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
 
-interface PrivilegeModel extends Model {
+export interface PrivilegeModel extends Model {
   id: number;
   name: string;
 }

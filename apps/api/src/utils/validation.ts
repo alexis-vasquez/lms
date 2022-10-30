@@ -1,6 +1,7 @@
 import { CONFIG } from "../config";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { GraphQLError } from "graphql";
 
 export const validateFields = (fields: string[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -30,4 +31,16 @@ export const validateToken = (
     return res.status(401).json({ error: "Invalid token" });
   }
   return next();
+};
+
+export const validatePrivileges = (
+  privilegeRequired: string,
+  userprivileges: string[]
+) => {
+  if (
+    !userprivileges.includes(privilegeRequired) &&
+    !userprivileges.includes("ALL_PRIVILEGES")
+  ) {
+    throw new GraphQLError("You don't have the required privileges");
+  }
 };
