@@ -1,8 +1,7 @@
-/* eslint-disable */
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Privileges', {
+    await queryInterface.createTable("Privileges", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -17,6 +16,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Privileges');
+    await queryInterface.dropTable("Privileges");
   },
 };

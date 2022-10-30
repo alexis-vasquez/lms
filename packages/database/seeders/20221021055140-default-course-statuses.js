@@ -1,4 +1,3 @@
-/* eslint-disable */
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -16,7 +15,7 @@ module.exports = {
         },
         {
           name: "cancelled",
-        }
+        },
       ],
       {}
     );
@@ -25,4 +24,3 @@ module.exports = {
     await queryInterface.bulkDelete("CourseStatuses", null, {});
   },
 };
-

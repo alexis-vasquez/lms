@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "docker-compose up -d",
     "build": "tsc",
+    "lint": "eslint .",
     "migrate:undo:all": "yarn build && npx sequelize db:migrate:undo:all",
     "migrate:all": "yarn build && npx sequelize db:migrate",
     "seeder:all": "yarn build && npx sequelize db:seed:all",
@@ -15,6 +16,7 @@
   "author": "Romanize",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.2",
     "sequelize": "^6.21.6",
     "invariant": "^2.2.4"
