@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
 import { CourseRegistration } from "./CourseRegistration";
+import { User } from "./User";
 
 interface CourseModel extends Model {
   id: number;
@@ -42,6 +43,11 @@ export const Course = sequelize.define<CourseModel>("Course", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  ownerId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 1,
+  },
   enable: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
@@ -50,6 +56,15 @@ export const Course = sequelize.define<CourseModel>("Course", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+});
+
+User.hasMany(Course, {
+  onDelete: "SET DEFAULT",
+  foreignKey: "ownerId",
+});
+
+Course.belongsTo(User, {
+  foreignKey: "ownerId",
 });
 
 CourseRegistration.belongsTo(Course, {

@@ -1,11 +1,26 @@
+import { useQueryState } from "@/hooks/useQueryState";
 import { Row, Tabs, Col, Card } from "@romalms/design-system";
-import { useState } from "react";
+
+export enum CourseTabsEnum {
+  AllCourses = "all",
+  Active = "active",
+  Upcoming = "upcoming",
+  Completed = "completed",
+}
 
 export const CoursesTabs = () => {
-  const [activeTab, setActiveTab] = useState("1");
+  const [query, setQuery] = useQueryState<{ status: CourseTabsEnum }>();
+
   return (
-    <Tabs activeKey={activeTab} defaultActiveKey="1" onChange={setActiveTab}>
-      <Tabs.TabPane tab="All courses" key="1">
+    <Tabs
+      defaultActiveKey={query.status}
+      activeKey={query.status}
+      onChange={(status) => setQuery({ status: status as CourseTabsEnum })}
+    >
+      <Tabs.TabPane
+        tab={CourseTabsEnum.AllCourses}
+        key={CourseTabsEnum.AllCourses}
+      >
         <Row gutter={[24, 24]} css={{ paddingLeft: 24, paddingRight: 24 }}>
           {new Array(18).fill(null).map((_, index) => (
             <Col span={6} key={index}>
@@ -20,7 +35,7 @@ export const CoursesTabs = () => {
           ))}
         </Row>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="Active" key="2">
+      <Tabs.TabPane tab={CourseTabsEnum.Active} key={CourseTabsEnum.Active}>
         <Row gutter={[24, 24]} css={{ paddingLeft: 24, paddingRight: 24 }}>
           {new Array(5).fill(null).map((_, index) => (
             <Col span={6} key={index}>
@@ -35,7 +50,7 @@ export const CoursesTabs = () => {
           ))}
         </Row>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="Upcoming" key="3">
+      <Tabs.TabPane tab={CourseTabsEnum.Upcoming} key={CourseTabsEnum.Upcoming}>
         <Row gutter={[24, 24]} css={{ paddingLeft: 24, paddingRight: 24 }}>
           {new Array(3).fill(null).map((_, index) => (
             <Col span={6} key={index}>
@@ -50,7 +65,10 @@ export const CoursesTabs = () => {
           ))}
         </Row>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="Finished" key="4">
+      <Tabs.TabPane
+        tab={CourseTabsEnum.Completed}
+        key={CourseTabsEnum.Completed}
+      >
         <Row gutter={[24, 24]} css={{ paddingLeft: 24, paddingRight: 24 }}>
           {new Array(6).fill(null).map((_, index) => (
             <Col span={6} key={index}>
