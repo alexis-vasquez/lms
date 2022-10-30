@@ -26,7 +26,7 @@ const main = async () => {
             return { user };
           }
           // default user context for playground
-          return { user: { privileges: ["ALL_PRIVILEGES"] } };
+          return { user: { id: 1, privileges: ["ALL_PRIVILEGES"] } };
         },
       })
     );

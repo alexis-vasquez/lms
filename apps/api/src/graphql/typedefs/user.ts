@@ -16,6 +16,7 @@ export const userTypeDef = `#graphql
   extend type Query {
     users: [User]!
     user(userId: ID!): User
+    me: User!
   }
 
   extend type Mutation {
