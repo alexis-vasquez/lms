@@ -1,5 +1,6 @@
-import { Role } from "@romalms/database/models";
+import { RoleService } from "../../../services/RoleService";
 
 export const roleQueryResolver: any = {
-  roles: () => Role.findAll(),
+  role: (_: any, args: { roleId: number }) =>
+    RoleService.getRoleById(args.roleId),
 };

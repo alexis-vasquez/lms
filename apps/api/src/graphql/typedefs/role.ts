@@ -6,5 +6,6 @@ export const roleTypeDef = `#graphql
 
   extend type Query {
     roles: [Role]!
+    role(roleId: ID!): Role
   }
 `;

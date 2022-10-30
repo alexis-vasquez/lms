@@ -1,5 +1,7 @@
 import { UserService } from "../../../services/UserService";
 
 export const userQueryResolver = {
-  getAllusers: () => UserService.getAllUsers(),
+  users: () => UserService.getAllUsers(),
+  user: (_: any, args: { userId: number }) =>
+    UserService.getUserById(args.userId),
 };

@@ -9,11 +9,13 @@ export const userTypeDef = `#graphql
     createdAt: String!
     updatedAt: String!
     role: Role!
+    privileges: [Privilege]!
     active: Boolean!
   }
 
   extend type Query {
-    getAllusers: [User]!
+    users: [User]!
+    user(userId: ID!): User
   }
 
   extend type Mutation {
