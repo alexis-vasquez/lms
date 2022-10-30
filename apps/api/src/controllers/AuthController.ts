@@ -1,9 +1,8 @@
 import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
-import { Sequelize } from "sequelize";
 import jwt from "jsonwebtoken";
-import { Role, User } from "../database/models";
 import { CONFIG } from "../config";
+import { UserService } from "../services/UserService";
 
 const saltRounds = 9;
 
@@ -16,19 +15,7 @@ export class AuthController {
   static login: RequestHandler = async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await User.findOne({
-      where: { email },
-      include: [{ model: Role, attributes: [] }],
-      attributes: [
-        "id",
-        "email",
-        "firstName",
-        "password",
-        "lastName",
-        [Sequelize.col('"Role"."name"'), "role"],
-      ],
-      raw: true,
-    });
+    const user = await UserService.getUserWithRoleByEmail(email);
     if (!user) return res.status(401).json({ error: "User not found" });
 
     const isValidPassword = await bcrypt.compare(password, user.password);
@@ -46,36 +33,32 @@ export class AuthController {
   static register: RequestHandler = async (req, res) => {
     const { email, password, firstName, lastName } = req.body;
 
-    const user = await User.findOne({ where: { email } });
+    const user = await UserService.getUserWithRoleByEmail(email);
     if (user)
       return res
         .status(409)
         .json({ error: "An user with this email already exists" });
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    await User.create({
-      firstName,
-      lastName,
+    await UserService.createNewUser({
       email,
       password: hashedPassword,
-      role: 2,
+      firstName,
+      lastName,
+      roleId: 2,
     });
 
-    const createdUser = await User.findOne({
-      where: { email },
-      include: [{ model: Role, attributes: [] }],
-      attributes: {
-        exclude: ["createdAt", "updatedAt", "role", "password"],
-        // Rename the column name from 'role.name' to 'role'
-        include: [[Sequelize.col('"Role"."name"'), "role"]],
-      },
-      raw: true,
-    });
+    const createdUser = await UserService.getUserWithRoleByEmail(email);
 
     if (!createdUser)
       return res.status(500).json({ error: "User could not be created" });
 
-    const token = jwt.sign(createdUser, CONFIG.JWT_SECRET, { expiresIn: 300 });
+    // Remove the password from the response
+    const { password: removedPassword, ...userWithoutPassword } = createdUser;
+
+    const token = jwt.sign(userWithoutPassword, CONFIG.JWT_SECRET, {
+      expiresIn: 300,
+    });
     return res.json({ token });
   };
 }

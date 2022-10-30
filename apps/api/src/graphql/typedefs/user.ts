@@ -13,7 +13,7 @@ export const userTypeDef = `#graphql
   }
 
   extend type Query {
-    users: [User]!
+    getAllusers: [User]!
   }
 
   extend type Mutation {

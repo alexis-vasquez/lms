@@ -1,6 +1,5 @@
-import { Sequelize } from "sequelize";
-import { Role, User } from "../../../database/models";
+import { UserService } from "../../../services/UserService";
 
 export const userQueryResolver = {
-  users: () => User.findAll({}),
+  getAllusers: () => UserService.getAllUsers(),
 };

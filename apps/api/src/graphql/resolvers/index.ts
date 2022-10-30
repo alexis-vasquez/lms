@@ -1,8 +1,9 @@
-import { Role } from "../../database/models";
-import { UserModel } from "../../database/models/User";
 import { roleQueryResolver } from "./Role";
-import { userMutationResolver, userQueryResolver } from "./User";
-import { userBaseQueryResolver } from "./User/baseQueries";
+import {
+  userMutationResolver,
+  userQueryResolver,
+  userBaseQueryResolver,
+} from "./User";
 
 export const resolvers: any = {
   Query: {
