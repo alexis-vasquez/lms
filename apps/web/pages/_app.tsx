@@ -1,13 +1,12 @@
 import { AppContextProvider } from "@/context/AppContext";
 import { AuthContextProvider } from "@/context/AuthContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppProps } from "next/app";
 
 import "@romalms/design-system/styles/main.css";
 import { NextPage } from "next";
 import { LayoutType, LayoutWrapper } from "@/components/Layout";
-
-const appClient = new QueryClient();
+import { ApolloProvider } from "@apollo/client";
+import { apolloClient } from "@/services/ApolloClient";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   layout?: LayoutType;
@@ -22,7 +21,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   // Workaround
   const AnyComponent = Component as any;
   return (
-    <QueryClientProvider client={appClient}>
+    <ApolloProvider client={apolloClient}>
       <AppContextProvider>
         <AuthContextProvider>
           <LayoutWrapper layout={layout}>
@@ -30,6 +29,6 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           </LayoutWrapper>
         </AuthContextProvider>
       </AppContextProvider>
-    </QueryClientProvider>
+    </ApolloProvider>
   );
 }

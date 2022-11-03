@@ -1,4 +1,3 @@
-import { useMutation } from "@tanstack/react-query";
 import {
   Alert,
   Button,
@@ -9,10 +8,8 @@ import {
   UserOutlined,
 } from "@romalms/design-system";
 import { css } from "@emotion/react";
-import { AxiosError } from "axios";
-import { useAuthService } from "@/services/AuthService";
-import { useErrorMessage } from "@/hooks/useErrorMessage";
 import { useAuthContext } from "@/context/AuthContext";
+import { useRegisterMutation } from "@/hooks/AuthHooks";
 
 export type RegisterFormValues = {
   email: string;
@@ -38,17 +35,17 @@ const styles = {
 };
 
 export const RegisterForm = () => {
-  const AuthService = useAuthService();
-  const { mutate, error } = useMutation(AuthService.register);
-  const errorMessage = useErrorMessage(error as AxiosError<{ error: string }>);
+  const [mutate, { loading, error }] = useRegisterMutation();
+  // const { mutate, error } = useMutation(AuthService.register);
   const { setToken } = useAuthContext();
   const [form] = Form.useForm();
 
   const handleSubmit = (values: RegisterFormValues) => {
     const { remember, ...userData } = values;
-    mutate(userData, {
-      onSuccess: ({ token }) => {
-        setToken(token, remember);
+    mutate({
+      variables: { input: userData },
+      onCompleted: ({ auth }) => {
+        setToken(auth.token, remember);
       },
       onError: () => {
         form.setFieldValue("password", "");
@@ -131,9 +128,9 @@ export const RegisterForm = () => {
           <Checkbox name="Remember me">Keep me signed in</Checkbox>
         </Form.Item>
       </Form.Item>
-      {errorMessage && (
+      {error?.message && (
         <Alert
-          message={errorMessage}
+          message={error.message}
           type="error"
           showIcon
           css={styles.errorMessage}

@@ -1,11 +1,10 @@
 import { FallbackSpinner } from "@/components/FallbackSpinner";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { useAuthService } from "@/services/AuthService";
-import { useQuery } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import { useTokenValidation } from "@/hooks/AuthHooks";
 import jwtDecode from "jwt-decode";
 import { createContext, PropsWithChildren, useContext } from "react";
 import { User } from "./types";
+import { apolloClient } from "@/services/ApolloClient";
 
 interface AuthContextI {
   user: User | null;
@@ -19,22 +18,17 @@ export const AuthContext = createContext<AuthContextI>({
 
 export const AuthContextProvider = ({ children }: PropsWithChildren) => {
   const [savedToken, setToken] = useLocalStorage<string | null>("token", null);
-  const AuthService = useAuthService();
 
-  const { isFetching, data } = useQuery(["user"], AuthService.validateToken, {
-    refetchOnWindowFocus: false,
-    retry: false,
-    onSuccess: ({ token }) => {
-      setToken(token, false);
+  const { loading, data } = useTokenValidation({
+    onCompleted: ({ auth }) => {
+      setToken(auth.token, false);
     },
-    onError: ({ response }: AxiosError) => {
-      if (response?.status === 401) {
-        setToken(null);
-      }
+    onError: (error) => {
+      setToken(null, false);
     },
   });
 
-  if (isFetching || (data?.token && !savedToken)) {
+  if (loading || (data?.auth.token && !savedToken)) {
     return <FallbackSpinner />;
   }
 

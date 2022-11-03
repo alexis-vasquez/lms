@@ -5,6 +5,7 @@ import { GraphQLError } from "graphql";
 
 export const validateFields = (fields: string[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body);
     const missingFields = fields.filter((field) => !req.body[field]);
     if (missingFields.length > 0) {
       res

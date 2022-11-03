@@ -1,10 +1,10 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 import { LoginForm } from ".";
 import { setupServer, waitForRequest } from "@/utils/test/setup";
 import { AuthContext } from "@/context/AuthContext";
 import userEvent from "@testing-library/user-event";
+import { ApolloProvider } from "@apollo/client";
 
 describe("LoginForm", () => {
   const emailText = "test@test.com";
@@ -16,18 +16,15 @@ describe("LoginForm", () => {
   const server = setupServer();
 
   function renderTestComponent() {
-    const queryClient = new QueryClient();
     render(
-      <QueryClientProvider client={queryClient}>
-        <AuthContext.Provider
-          value={{
-            user: null,
-            setToken,
-          }}
-        >
-          <LoginForm />
-        </AuthContext.Provider>
-      </QueryClientProvider>
+      <AuthContext.Provider
+        value={{
+          user: null,
+          setToken,
+        }}
+      >
+        <LoginForm />
+      </AuthContext.Provider>
     );
   }
 

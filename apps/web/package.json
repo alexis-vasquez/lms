@@ -10,9 +10,10 @@
     "test": "jest --watch --transformIgnorePatterns \"node_modules/(?!axios)/\""
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@romalms/design-system": "*",
-    "@tanstack/react-query": "^4.12.0",
-    "axios": "^1.1.2",
+    "apollo-link-rest": "^0.9.0-rc.2",
+    "graphql": "^16.6.0",
     "jwt-decode": "^3.1.2",
     "next": "12.3.1",
     "react": "18.2.0",
