@@ -32,7 +32,7 @@ export const CourseStatus = sequelize.define<CourseStatusModel>(
 );
 
 Course.belongsTo(CourseStatus, {
-  foreignKey: "statusId",
+  foreignKey: "courseStatusId",
 });
 
 CourseStatus.hasMany(Course, {

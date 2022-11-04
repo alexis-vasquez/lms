@@ -1,4 +1,5 @@
 import { commonTypeDef } from "./common";
+import { courseTypeDef } from "./course";
 import { privilegesTypeDef } from "./privileges";
 import { roleTypeDef } from "./role";
 import { userTypeDef } from "./user";
@@ -19,4 +20,5 @@ export const typeDefs = [
   userTypeDef,
   roleTypeDef,
   privilegesTypeDef,
+  courseTypeDef,
 ];
