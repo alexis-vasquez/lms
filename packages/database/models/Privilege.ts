@@ -18,7 +18,6 @@ export const Privilege = sequelize.define<PrivilegeModel>(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
   },
   {

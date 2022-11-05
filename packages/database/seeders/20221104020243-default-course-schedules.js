@@ -24,8 +24,7 @@ module.exports = {
         endDate: "2023-02-08",
         startTime: "20:00:00",
         endTime: "23:00:00",
-        /*Consultar como se combina el S.W.D con Schedule*/
-        scheduleWeekDaysId: null,
+        scheduleWeekDaysId: 1,
         createdAt: new Date().toUTCString(),
         updatedAt: new Date().toUTCString(),
       },
@@ -33,7 +32,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /* await queryInterface.bulkDelete("ScheduleWeekDays", null, {}); */
+    await queryInterface.bulkDelete("ScheduleWeekDays", null, {});
     await queryInterface.bulkDelete("Schedules", null, {});
   },
 };

@@ -7,7 +7,11 @@ module.exports = {
       "Categories",
       [
         {
-          name: "Course Test",
+          name: "Front End Developer",
+          description: null,
+        },
+        {
+          name: "Back End Developer",
           description: null,
         },
       ],
