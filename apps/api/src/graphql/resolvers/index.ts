@@ -1,3 +1,4 @@
+import { courseQueryResolver } from "./Course";
 import { roleQueryResolver } from "./Role";
 import { userQueryResolver, userBaseQueryResolver } from "./User";
 
@@ -6,6 +7,7 @@ export const resolvers: any = {
     // Default query for init
     ...userQueryResolver,
     ...roleQueryResolver,
+    ...courseQueryResolver,
   },
   Mutation: {
     // Default mutation for init

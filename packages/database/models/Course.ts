@@ -3,14 +3,14 @@ import { sequelize } from "..";
 import { CourseRegistration } from "./CourseRegistration";
 import { User } from "./User";
 
-interface CourseModel extends Model {
+export interface CourseModel extends Model {
   id: number;
   name: string;
   description: string;
   categoryId: number;
   level: string;
   rate: number;
-  statusId: number;
+  courseStatusId: number;
   enable: boolean;
   scheduleId: number;
 }

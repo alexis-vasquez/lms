@@ -1,5 +1,4 @@
-import { Sequelize } from "sequelize";
-import { Privilege, Role, User } from "@romalms/database/models";
+import { User } from "@romalms/database/models";
 
 export class UserService {
   static getAllUsers() {
