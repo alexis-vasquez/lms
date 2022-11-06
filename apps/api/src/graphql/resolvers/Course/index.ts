@@ -1,0 +1,1 @@
+export { courseQueryResolver } from "./queries";

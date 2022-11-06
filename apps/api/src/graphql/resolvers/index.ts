@@ -1,4 +1,4 @@
-import { courseQueryResolver } from "./Course/queries";
+import { courseQueryResolver } from "./Course";
 import { roleQueryResolver } from "./Role";
 import { userQueryResolver, userBaseQueryResolver } from "./User";
 
