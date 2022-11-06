@@ -32,7 +32,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("ScheduleWeekDays", null, {});
     await queryInterface.bulkDelete("Schedules", null, {});
+    await queryInterface.bulkDelete("ScheduleWeekDays", null, {});
   },
 };
