@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
 import { Course } from "./Course";
 
-interface ScheduleModel extends Model {
+export interface ScheduleModel extends Model {
   id: number;
   startDate: Date;
   endDate: Date;

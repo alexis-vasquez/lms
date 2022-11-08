@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from "..";
 import { Course } from "./Course";
 
-interface CategoryModel extends Model {
+export interface CategoryModel extends Model {
   id: number;
   name: string;
   description: string;

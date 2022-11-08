@@ -9,7 +9,7 @@ enum CourseStatusName {
   CANCELLED = "cancelled",
 }
 
-interface CourseStatusModel extends Model {
+export interface CourseStatusModel extends Model {
   id: number;
   name: CourseStatusName;
 }
