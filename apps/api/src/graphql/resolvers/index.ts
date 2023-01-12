@@ -1,4 +1,4 @@
-import { courseQueryResolver } from "./Course";
+import { courseQueryResolver, courseBaseQueryResolver } from "./Course";
 import { roleQueryResolver } from "./Role";
 import { userQueryResolver, userBaseQueryResolver } from "./User";
 
@@ -15,4 +15,5 @@ export const resolvers: any = {
     _: () => true,
   },
   ...userBaseQueryResolver,
+  ...courseBaseQueryResolver,
 };

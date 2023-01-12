@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "migrate:undo:all": "yarn build && npx sequelize db:migrate:undo:all",
     "migrate:all": "npx sequelize db:migrate",
+    "seeder:undo:all": "npx sequelize db:seed:undo:all",
     "seeder:all": "npx sequelize db:seed:all",
     "db:init": "yarn build && yarn migrate:all && yarn seeder:all"
   },

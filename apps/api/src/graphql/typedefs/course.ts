@@ -18,6 +18,6 @@ export const courseTypeDef = `#graphql
   extend type Query {
     courses: [Course]!
     mycourses: [Course]!
-    course (courseId: ID!): Course
+    course(courseId: ID!): Course
   }
 `;
