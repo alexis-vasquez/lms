@@ -18,6 +18,7 @@ export const typeDefs = [
   baseTypeDefs,
   commonTypeDef,
   userTypeDef,
+  courseTypeDef,
   roleTypeDef,
   privilegesTypeDef,
   courseTypeDef,

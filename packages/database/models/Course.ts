@@ -11,6 +11,7 @@ export interface CourseModel extends Model {
   level: string;
   rate: number;
   courseStatusId: number;
+  ownerId: number;
   enable: boolean;
   scheduleId: number;
 }

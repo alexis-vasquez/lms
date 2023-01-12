@@ -3,10 +3,12 @@ export const courseTypeDef = `#graphql
     id: ID!
     name: String!
     description: String
-    categoryId: ID!
-    level: String!
+    categoryId: ID
+    level: String
     rate: Float!
     courseStatusId: ID!
+    ownerId: ID!
+    owner: User!
     enable: Boolean!
     scheduleId: ID!
     createdAt: String!
@@ -17,9 +19,5 @@ export const courseTypeDef = `#graphql
     courses: [Course]!
     mycourses: [Course]!
     course (courseId: ID!): Course
-  }
-
-  extend type Mutation {
-    courses: [Course]!
   }
 `;

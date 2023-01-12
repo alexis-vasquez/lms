@@ -6,6 +6,7 @@ export const resolvers: any = {
   Query: {
     // Default query for init
     ...userQueryResolver,
+    ...courseQueryResolver,
     ...roleQueryResolver,
     ...courseQueryResolver,
   },

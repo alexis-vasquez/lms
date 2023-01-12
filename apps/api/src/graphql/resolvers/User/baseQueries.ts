@@ -2,7 +2,7 @@ import { PrivilegeModel } from "@romalms/database/models/Privilege";
 import { UserModel } from "@romalms/database/models/User";
 import { RoleService } from "../../../services/RoleService";
 
-export const userBaseQueryResolver: any = {
+export const userBaseQueryResolver = {
   User: {
     role: (user: UserModel) => RoleService.getRoleById(user.roleId),
     privileges: (user: UserModel) =>

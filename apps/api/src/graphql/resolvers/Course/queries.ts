@@ -2,6 +2,7 @@ import { CourseService } from "../../../services/CourseService";
 
 export const courseQueryResolver = {
   courses: () => CourseService.getAllCourses(),
-  course: (_: void, args: { courseId: number }) =>
+  course: (_: any, args: { courseId: number }) =>
     CourseService.getCourseById(args.courseId),
+  mycourses: (_: any, args: { userId: number }) => [],
 };
