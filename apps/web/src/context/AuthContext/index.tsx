@@ -1,10 +1,10 @@
 import { FallbackSpinner } from "@/components/FallbackSpinner";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { useTokenValidation } from "@/hooks/AuthHooks";
 import jwtDecode from "jwt-decode";
 import { createContext, PropsWithChildren, useContext } from "react";
 import { User } from "./types";
 import { apolloClient } from "@/services/ApolloClient";
+import { useAuthService } from "@/services/AuthService";
 
 interface AuthContextI {
   user: User | null;
@@ -17,9 +17,10 @@ export const AuthContext = createContext<AuthContextI>({
 });
 
 export const AuthContextProvider = ({ children }: PropsWithChildren) => {
+  const AuthService = useAuthService();
   const [savedToken, setToken] = useLocalStorage<string | null>("token", null);
 
-  const { loading, data } = useTokenValidation({
+  const { loading, data } = AuthService.useTokenValidation({
     onCompleted: ({ auth }) => {
       setToken(auth.token, false);
     },

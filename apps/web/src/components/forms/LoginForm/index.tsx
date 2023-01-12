@@ -8,8 +8,8 @@ import {
   UserOutlined,
 } from "@romalms/design-system";
 import { css } from "@emotion/react";
-import { useLoginMutation } from "@/hooks/AuthHooks";
 import { useAuthContext } from "@/context/AuthContext";
+import { useAuthService } from "@/services/AuthService";
 
 export type LoginFormValues = {
   email: string;
@@ -33,7 +33,8 @@ const styles = {
 };
 
 export const LoginForm = () => {
-  const [mutation, { loading, error }] = useLoginMutation();
+  const AuthService = useAuthService();
+  const [mutation, { loading, error }] = AuthService.useLoginMutation();
   const { setToken } = useAuthContext();
   const [form] = Form.useForm();
 

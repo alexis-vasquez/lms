@@ -9,7 +9,7 @@ import {
 } from "@romalms/design-system";
 import { css } from "@emotion/react";
 import { useAuthContext } from "@/context/AuthContext";
-import { useRegisterMutation } from "@/hooks/AuthHooks";
+import { useAuthService } from "@/services/AuthService";
 
 export type RegisterFormValues = {
   email: string;
@@ -35,7 +35,8 @@ const styles = {
 };
 
 export const RegisterForm = () => {
-  const [mutate, { loading, error }] = useRegisterMutation();
+  const AuthService = useAuthService();
+  const [mutate, { loading, error }] = AuthService.useRegisterMutation();
   // const { mutate, error } = useMutation(AuthService.register);
   const { setToken } = useAuthContext();
   const [form] = Form.useForm();

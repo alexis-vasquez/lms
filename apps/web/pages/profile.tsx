@@ -1,6 +1,6 @@
 import { LayoutType } from "@/components/Layout";
-import { useProfileQuery } from "@/hooks/UserHooks";
 import { privatePage } from "@/router";
+import { useUserService } from "@/services/UserService";
 import { padId } from "@/utils/strings";
 import {
   Button,
@@ -14,7 +14,8 @@ import {
 import { NextPageWithLayout } from "./_app";
 
 const Profile: NextPageWithLayout = () => {
-  const { data } = useProfileQuery();
+  const UserService = useUserService();
+  const { data } = UserService.useProfileQuery();
 
   if (!data) return null;
 
